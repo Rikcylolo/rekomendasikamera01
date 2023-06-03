@@ -2,14 +2,60 @@ import 'package:camera_market_app/pages/admin_page/update_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class DataListPage extends StatelessWidget {
+class DataListPage extends StatefulWidget {
   const DataListPage({Key? key}) : super(key: key);
   static const routeName = '/dataListPageRoute';
 
   @override
+  State<DataListPage> createState() => _DataListPageState();
+}
+
+class _DataListPageState extends State<DataListPage> {
+  final cameraCollection = FirebaseFirestore.instance.collection('camera');
+  final TextEditingController searchInputController = TextEditingController();
+
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> cameraList = [];
+  List<QueryDocumentSnapshot<Map<String, dynamic>>> cameraTempList = [];
+  bool isLoading = true;
+
+  Future<void> getCamera() async {
+    isLoading = true;
+    final result = await cameraCollection.get();
+
+    setState(() {
+      cameraList = result.docs;
+      cameraList.sort((a, b) => (a.data()['namaProduk'] as String)
+          .compareTo((b.data()['namaProduk'] as String)));
+      cameraTempList = result.docs;
+      cameraTempList.sort((a, b) => (a.data()['namaProduk'] as String)
+          .compareTo((b.data()['namaProduk'] as String)));
+      isLoading = false;
+    });
+  }
+
+  Future<void> deleteCamera(String id) async {
+    await cameraCollection.doc(id).delete();
+    getCamera();
+  }
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      getCamera();
+    });
+
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    searchInputController.dispose();
+
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
-    final CollectionReference camera =
-        FirebaseFirestore.instance.collection('camera');
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -39,131 +85,158 @@ class DataListPage extends StatelessWidget {
           ),
         ),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(20.0),
-        alignment: Alignment.center,
-        decoration: const BoxDecoration(
-          color: Color(0xFFEAEAEA),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+      body: SingleChildScrollView(
+        child: Container(
+          padding: const EdgeInsets.all(20.0),
+          alignment: Alignment.center,
+          decoration: const BoxDecoration(
+            color: Color(0xFFEAEAEA),
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
           ),
-        ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Text(
-                      'Selamat datang, Admin <adminID>',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'FontPoppins',
-                        fontSize: 14,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: const [
+                      Text(
+                        'Selamat datang, Admin <adminID>',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'FontPoppins',
+                          fontSize: 14,
+                        ),
                       ),
-                    ),
-                    // SizedBox(
-                    //   height: 6.0,
-                    // ),
-                    Text(
-                      'Camera List',
-                      style: TextStyle(
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'FontPoppins',
-                        fontSize: 17,
+                      // SizedBox(
+                      //   height: 6.0,
+                      // ),
+                      Text(
+                        'Camera List',
+                        style: TextStyle(
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'FontPoppins',
+                          fontSize: 17,
+                        ),
                       ),
+                    ],
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 18,
+              ),
+              TextFormField(
+                controller: searchInputController,
+                decoration: InputDecoration(
+                  filled: true,
+                  fillColor: Colors.white,
+                  hintText: "Cari kamera",
+                  hintStyle: TextStyle(
+                      fontFamily: 'FontPoppins',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 15,
+                      color: Color(0xFFA8A8A8)),
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide.none),
+                  suffixIcon: InkWell(
+                    onTap: () {
+                      setState(() {
+                        searchInputController.clear();
+                        cameraList = cameraTempList;
+                      });
+                    },
+                    child: Icon(
+                      Icons.close,
+                      color: Color.fromARGB(208, 38, 38, 38),
                     ),
-                  ],
+                  ),
+                  contentPadding: EdgeInsets.only(left: 20),
                 ),
-              ],
-            ),
-            const SizedBox(
-              height: 18,
-            ),
-            SizedBox(
-              width: double.infinity,
-              height: size.height * .7,
-              child: StreamBuilder(
-                stream: camera.snapshots(),
-                builder:
-                    (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-                  if (streamSnapshot.hasData) {
-                    return ListView.builder(
-                      itemCount: streamSnapshot.data?.docs.length,
-                      itemBuilder: (context, index) {
-                        final documentSnapshot =
-                            streamSnapshot.data?.docs[index];
-                        return Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          margin: const EdgeInsets.only(bottom: 15),
-                          child: Ink(
-                            color: Colors.transparent,
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => UpdatePage(
-                                        documentSnapshot: documentSnapshot),
-                                  ),
-                                );
-                              },
-                              child: ListTile(
-                                title: DefaultTextStyle(
-                                  style: const TextStyle(
-                                    fontSize: 14,
-                                    fontFamily: 'FontPoppins',
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.black,
-                                  ),
-                                  child: Text(documentSnapshot!['namaProduk']),
-                                ),
-                                trailing: SizedBox(
-                                  width: size.width * 0.3,
-                                  child: Row(
-                                    children: [
-                                      Spacer(),
-                                      IconButton(
-                                        icon: const Icon(Icons.delete),
-                                        onPressed: () {
-                                          camera
-                                              .doc(documentSnapshot.id)
-                                              .delete();
-                                          ScaffoldMessenger.of(context)
-                                              .showSnackBar(
-                                            const SnackBar(
-                                              content: Text(
-                                                  'Anda telah berhasil menghapus buku.'),
-                                              duration:
-                                                  Duration(milliseconds: 500),
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  } else {
-                    return const Center();
-                  }
+                onChanged: (value) {
+                  setState(() {
+                    cameraList = cameraTempList
+                        .where((item) => (item.data()['namaProduk'] as String)
+                            .toLowerCase()
+                            .contains(value.toLowerCase()))
+                        .toList();
+                  });
                 },
               ),
-            )
-          ],
+              const SizedBox(
+                height: 10.0,
+              ),
+              ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: cameraList.length,
+                itemBuilder: (context, index) {
+                  final documentSnapshot = cameraList[index];
+                  return Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    margin: const EdgeInsets.only(bottom: 15),
+                    child: Ink(
+                      color: Colors.transparent,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => UpdatePage(
+                                  documentSnapshot: documentSnapshot),
+                            ),
+                          );
+                        },
+                        child: ListTile(
+                          title: DefaultTextStyle(
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontFamily: 'FontPoppins',
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black,
+                            ),
+                            child: Text(documentSnapshot!['namaProduk']),
+                          ),
+                          trailing: SizedBox(
+                            width: size.width * 0.3,
+                            child: Row(
+                              children: [
+                                Spacer(),
+                                IconButton(
+                                  icon: const Icon(Icons.delete),
+                                  onPressed: () {
+                                    deleteCamera(documentSnapshot.id);
+                                    searchInputController.clear();
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                            'Anda telah berhasil menghapus buku.'),
+                                        duration: Duration(milliseconds: 500),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              )
+            ],
+          ),
         ),
       ),
     );
