@@ -1,4 +1,4 @@
-import 'package:camera_market_app/pages/home_page.dart';
+import 'package:camera_market_app/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const HomePage(),
+          builder: (context) => const MainPage(),
         ),
       );
     });
@@ -26,7 +26,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       backgroundColor: Colors.black38,
       body: Stack(
-        children:[
+        children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
@@ -41,7 +41,6 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ],
           ),
-
           Positioned(
             top: 100.0,
             bottom: 0.0,
@@ -54,9 +53,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   'assets/icons/Logo.png',
                   color: Colors.white,
                 ),
-
-                const SizedBox(height: 18,),
-
+                const SizedBox(
+                  height: 18,
+                ),
                 const Text(
                   'Temukan Kamera\nterbaik kamu',
                   style: TextStyle(
@@ -74,4 +73,3 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 }
-

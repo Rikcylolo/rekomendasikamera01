@@ -60,7 +60,6 @@ class HomePage extends StatelessWidget {
                 topRight: Radius.circular(20),
               ),
             ),
-            height: size.height * .7,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -100,7 +99,7 @@ class HomePage extends StatelessWidget {
                 )
               ],
             ),
-          )
+          ),
         ],
       ),
     );

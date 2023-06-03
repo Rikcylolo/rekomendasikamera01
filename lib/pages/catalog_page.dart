@@ -1,8 +1,7 @@
-import 'dart:ui';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:camera_market_app/widgets/camera_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class CatalogPage extends StatefulWidget {
   const CatalogPage({Key? key}) : super(key: key);
@@ -83,17 +82,8 @@ class _CatalogPageState extends State<CatalogPage> {
         toolbarHeight: 72,
         centerTitle: true,
         backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
         elevation: 0.0,
-        leading: Padding(
-          padding: EdgeInsets.only(top: 0),
-          child: IconButton(
-            icon: Image.asset(
-              'assets/icons/backarrow.png',
-              color: Color(0xFF262626),
-            ),
-            onPressed: () => Navigator.pop(context),
-          ),
-        ),
         title: Padding(
           padding: EdgeInsets.only(top: 0),
           child: SizedBox(

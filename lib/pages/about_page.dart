@@ -10,15 +10,8 @@ class AboutPage extends StatelessWidget {
         appBar: AppBar(
           centerTitle: true,
           backgroundColor: Colors.transparent,
+          foregroundColor: Colors.black,
           elevation: 0.0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-            onPressed: () => Navigator.pop(context),
-          ),
-
           title: SizedBox(
             height: 50,
             width: 90,
@@ -28,7 +21,6 @@ class AboutPage extends StatelessWidget {
             ),
           ),
         ),
-
         body: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -66,7 +58,7 @@ class AboutPage extends StatelessWidget {
                     width: double.infinity, // mengisi seluruh lebar layar
                     height: 200.0, // tinggi container kedua
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.grey[200],
                       borderRadius: const BorderRadius.only(
                         topLeft: Radius.circular(20.0),
                         topRight: Radius.circular(20.0),
@@ -84,35 +76,36 @@ class AboutPage extends StatelessWidget {
                               height: 130,
                               decoration: BoxDecoration(
                                   color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
                             Container(
                               width: 100,
                               height: 130,
                               decoration: BoxDecoration(
                                   color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
                             Container(
                               width: 100,
                               height: 130,
                               decoration: BoxDecoration(
                                   color: Colors.grey,
-                                  borderRadius: BorderRadius.circular(10)
-                              ),
-
+                                  borderRadius: BorderRadius.circular(10)),
                             ),
                           ],
                         ),
-
-                        const SizedBox(height: 20,),
-                        const Text("Informasi", style: TextStyle(fontWeight: FontWeight.bold),),
-                        const SizedBox(height: 20,),
-                        const Text("Aplikasi Sistem Rekomendasi Kamera ini dibuat menggunakan metode Weighted Aggregated Sum Product Assessment (WASPAS) untuk mendapatkan rekomendasi kamera terbaik sesuai dengan kebutuhan pengguna. Dengan memasukkan bobot terhadap spesifikasi kamera yang dibutuhkan, sistem dapat merekomendasikan kamera yang paling sesuai dengan kebutuhan pengguna. Pengguna memasukkan data kebutuhan pada diagram likert yang memiliki nilai antara satu (1) sampai lima (5)."),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                          "Informasi",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        const Text(
+                            "Aplikasi Sistem Rekomendasi Kamera ini dibuat menggunakan metode Weighted Aggregated Sum Product Assessment (WASPAS) untuk mendapatkan rekomendasi kamera terbaik sesuai dengan kebutuhan pengguna. Dengan memasukkan bobot terhadap spesifikasi kamera yang dibutuhkan, sistem dapat merekomendasikan kamera yang paling sesuai dengan kebutuhan pengguna. Pengguna memasukkan data kebutuhan pada diagram likert yang memiliki nilai antara satu (1) sampai lima (5)."),
                       ],
                     ),
                   ),
@@ -120,7 +113,6 @@ class AboutPage extends StatelessWidget {
               ],
             )
           ],
-        )
-    );
+        ));
   }
 }
