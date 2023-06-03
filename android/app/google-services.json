@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "657908734698",
+    "project_id": "rekomendasikamera-b43d2",
+    "storage_bucket": "rekomendasikamera-b43d2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:657908734698:android:fc89c605f55e71db085593",
+        "android_client_info": {
+          "package_name": "com.example.camera_market_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "657908734698-1gm47nh1dp7l9g76mdaonvtg880gcvq1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJnLifo_oik4l2nf5KmLbHr3NGeReLFP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "657908734698-1gm47nh1dp7l9g76mdaonvtg880gcvq1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

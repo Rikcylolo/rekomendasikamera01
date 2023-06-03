@@ -1,0 +1,41 @@
+name: camera_market_app
+description: A new Flutter project.
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.18.0 <3.0.0'
+
+dependencies:
+  flutter_svg: ^1.0.0
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.5
+  carousel_slider: ^4.2.1
+  cloud_firestore: ^4.6.0
+  firebase_core: ^2.11.0
+  uuid: ^3.0.7
+  image_picker: ^0.8.7+4
+  firebase_storage: ^11.1.2
+  shared_preferences: ^2.1.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.1
+
+flutter:
+  uses-material-design: true
+  fonts:
+    - family: FontPoppins
+      fonts:
+      - asset: assets/fonts/Poppins-Regular.ttf
+      - asset: assets/fonts/Poppins-Medium.ttf
+      - asset: assets/fonts/Poppins-SemiBold.ttf
+  assets:
+    - assets/icons/
+    - assets/images/
