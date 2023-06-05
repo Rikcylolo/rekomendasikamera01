@@ -4,6 +4,7 @@ import 'package:camera_market_app/pages/catalog_page.dart';
 import 'package:camera_market_app/pages/favorite_page.dart';
 import 'package:camera_market_app/pages/recommendation_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -35,31 +36,35 @@ class HomePage extends StatelessWidget {
               children: [
                 Center(
                   child: SizedBox(
-                    height: 50,
-                    width: 90,
-                    child: Image.asset(
-                      'assets/icons/Logo.png',
-                      color: Colors.black,
+                    child: SvgPicture.asset(
+                      'assets/icons/logo.svg',
                     ),
                   ),
                 ),
+                const SizedBox(height: 30),
                 const Text(
                   "Temukan Kamera Terbaik Kamu",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(
+                    fontFamily: 'FontPoppins',
+                    fontWeight: FontWeight.w600,
+                    //letterSpacing: 0.7,
+                    fontSize: 14,
+                  ),
                 ),
-                const SizedBox(height: 30),
+                const SizedBox(height: 63),
               ],
             ),
           ),
           Container(
             alignment: Alignment.center,
             decoration: const BoxDecoration(
-              color: Colors.grey,
+              color: Color(0xFFEAEAEA),
               borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(20),
-                topRight: Radius.circular(20),
+                topLeft: Radius.circular(30),
+                topRight: Radius.circular(30),
               ),
             ),
+            height: size.height * .7,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -80,6 +85,7 @@ class HomePage extends StatelessWidget {
                     )
                   ],
                 ),
+                const SizedBox(height: 15 - 7),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -123,9 +129,9 @@ class HomeContainer extends StatelessWidget {
     return InkWell(
       onTap: () => tujuan(),
       child: Container(
-        margin: const EdgeInsets.all(8.0),
-        height: 200,
-        width: 150,
+        margin: const EdgeInsets.all(15),
+        height: 207,
+        width: 151,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadiusDirectional.circular(20)),
@@ -134,13 +140,14 @@ class HomeContainer extends StatelessWidget {
           children: [
             icon,
             const SizedBox(
-              height: 15,
+              height: 28,
             ),
             Text(
               nama,
               style: const TextStyle(
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
+                fontSize: 14,
+                fontFamily: 'FontPoppins',
+                fontWeight: FontWeight.w600,
               ),
             ),
           ],

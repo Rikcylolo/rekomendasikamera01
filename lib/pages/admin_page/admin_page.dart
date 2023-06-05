@@ -45,7 +45,7 @@ class _AdminPageState extends State<AdminPage> {
         toolbarHeight: 72,
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        foregroundColor: Colors.red,
+        foregroundColor: Colors.black,
         elevation: 0.0,
         leading: Padding(
           padding: EdgeInsets.only(top: 0),
