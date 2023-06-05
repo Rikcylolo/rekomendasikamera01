@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:uuid/uuid.dart';
 
@@ -54,8 +55,8 @@ class _InsertPageState extends State<InsertPage> {
         leading: Padding(
           padding: EdgeInsets.only(top: 0),
           child: IconButton(
-            icon: Image.asset(
-              'assets/icons/backarrow.png',
+            icon: SvgPicture.asset(
+              'assets/icons/backarrow.svg',
               color: Color(0xFF262626),
             ),
             onPressed: () => Navigator.pop(context),
@@ -64,10 +65,8 @@ class _InsertPageState extends State<InsertPage> {
         title: Padding(
           padding: EdgeInsets.only(top: 0),
           child: SizedBox(
-            height: 30,
-            width: 124.09,
-            child: Image.asset(
-              'assets/icons/Logo.png',
+            child: SvgPicture.asset(
+              'assets/icons/logo.svg',
             ),
           ),
         ),

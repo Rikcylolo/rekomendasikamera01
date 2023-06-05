@@ -52,6 +52,7 @@ class _ResultPageState extends State<ResultPage> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 72,
         centerTitle: true,
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
@@ -59,8 +60,8 @@ class _ResultPageState extends State<ResultPage> {
         leading: Padding(
           padding: EdgeInsets.only(top: 0),
           child: IconButton(
-            icon: Image.asset(
-              'assets/icons/backarrow.png',
+            icon: SvgPicture.asset(
+              'assets/icons/backarrow.svg',
               color: Color(0xFF262626),
             ),
             onPressed: () => Navigator.pop(context),
@@ -103,6 +104,7 @@ class _ResultPageState extends State<ResultPage> {
                     ),
                   ),
                   Switch(
+                    activeColor: Color(0xFF1F1F1F),
                     value: switchTop5,
                     onChanged: (value) {
                       setState(() {

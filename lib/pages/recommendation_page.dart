@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:camera_market_app/pages/result_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class RecommendationPage extends StatefulWidget {
   const RecommendationPage({Key? key}) : super(key: key);
@@ -45,22 +46,28 @@ class _RecommendationPageState extends State<RecommendationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          toolbarHeight: 72,
           centerTitle: true,
           backgroundColor: Colors.transparent,
           elevation: 0.0,
-          leading: IconButton(
-            icon: const Icon(
-              Icons.arrow_back,
-              color: Colors.black,
+          leading: Padding(
+            padding: EdgeInsets.only(top: 0),
+            child: IconButton(
+              icon: SvgPicture.asset(
+                'assets/icons/backarrow.svg',
+                color: Color(0xFF262626),
+              ),
+              onPressed: () => Navigator.pop(context),
             ),
-            onPressed: () => Navigator.pop(context),
           ),
-          title: SizedBox(
-            height: 50,
-            width: 90,
-            child: Image.asset(
-              'assets/icons/Logo.png',
-              color: Colors.black,
+          title: Padding(
+            padding: EdgeInsets.only(top: 0),
+            child: SizedBox(
+              height: 30,
+              width: 124.09,
+              child: SvgPicture.asset(
+                'assets/icons/logo.svg',
+              ),
             ),
           ),
         ),
@@ -70,30 +77,40 @@ class _RecommendationPageState extends State<RecommendationPage> {
             Stack(
               children: [
                 Container(
-                  height: 660,
+                  height: 800 - 101,
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
-                    color: Colors.grey[400],
+                    color: Color(0xFFEAEAEA),
                     borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(20.0),
-                      topRight: Radius.circular(20.0),
+                      topLeft: Radius.circular(30.0),
+                      topRight: Radius.circular(30.0),
                     ),
                   ),
                   child: Container(
-                    margin: const EdgeInsets.all(18.0),
+                    alignment: Alignment.topLeft,
+                    margin: const EdgeInsets.all(20.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
                         Text(
-                          'Rekomemdasi Kamera',
+                          'Rekomendasi Kamera',
                           style: TextStyle(
+                            fontFamily: 'FontPoppins',
                             fontWeight: FontWeight.w600,
-                            fontSize: 20,
+                            fontSize: 14,
                           ),
                         ),
+                        const SizedBox(
+                          height: 5,
+                        ),
                         Text(
-                            'Kamera direkomendasikan berdasarkan kebutuhan terhadap spesifikasi kamera yang kamu butuhkan.'),
+                          'Kamera direkomendasikan berdasarkan kebutuhan \nterhadap spesifikasi kamera yang kamu butuhkan.',
+                          style: TextStyle(
+                              fontFamily: 'FontPoppins',
+                              fontSize: 10,
+                              fontWeight: FontWeight.w400),
+                        ),
                       ],
                     ),
                   ),
@@ -101,19 +118,19 @@ class _RecommendationPageState extends State<RecommendationPage> {
                 Positioned(
                   left: 0.0,
                   right: 0.0,
-                  top: 90.0,
+                  top: 98.0,
                   bottom: 0.0,
                   child: Container(
-                    padding: const EdgeInsets.all(18.0),
+                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
                     width: double.infinity,
                     // mengisi seluruh lebar layar
                     height: 200.0,
                     // tinggi container kedua
                     decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                      color: Colors.white,
                       borderRadius: const BorderRadius.only(
-                        topLeft: Radius.circular(20.0),
-                        topRight: Radius.circular(20.0),
+                        topLeft: Radius.circular(30.0),
+                        topRight: Radius.circular(30.0),
                       ),
                     ),
                     // warna putih
@@ -124,12 +141,12 @@ class _RecommendationPageState extends State<RecommendationPage> {
                         children: [
                           IntrinsicHeight(
                             child: Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 12.0, vertical: 8.0),
+                              padding:
+                                  const EdgeInsets.fromLTRB(13, 10, 19, 11),
                               decoration: BoxDecoration(
-                                color: Colors.grey[400],
+                                color: Color(0xFFEAEAEA),
                                 borderRadius:
-                                    const BorderRadius.all(Radius.circular(20)),
+                                    const BorderRadius.all(Radius.circular(30)),
                               ), //
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -139,16 +156,17 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                   const Text(
                                     'Filter berdasarkan merek',
                                     style: TextStyle(
+                                      fontFamily: 'FontPoppins',
                                       fontWeight: FontWeight.w600,
-                                      fontSize: 20,
+                                      fontSize: 14,
                                     ),
                                   ),
                                   Container(
-                                    height: 40,
-                                    margin: const EdgeInsets.symmetric(
-                                        vertical: 8.0),
+                                    height: 29,
+                                    margin:
+                                        const EdgeInsets.symmetric(vertical: 6),
                                     padding: const EdgeInsets.symmetric(
-                                      horizontal: 8.0,
+                                      horizontal: 20.0,
                                     ),
                                     decoration: const BoxDecoration(
                                         color: Colors.white,
@@ -162,24 +180,52 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                           const TextStyle(color: Colors.black),
                                       hint: const Text(
                                         "Merek Kamera",
-                                        style: TextStyle(color: Colors.black),
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontFamily: 'FontPoppins',
+                                            fontSize: 10,
+                                            fontWeight: FontWeight.w500),
                                       ),
                                       items: const [
                                         DropdownMenuItem(
                                           value: "ALL",
-                                          child: Text("SEMUA MEREK"),
+                                          child: Text(
+                                            "Semua Merek",
+                                            style: TextStyle(
+                                                fontFamily: 'FontPoppins',
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w500),
+                                          ),
                                         ),
                                         DropdownMenuItem(
                                           value: "SONY",
-                                          child: Text("SONY"),
+                                          child: Text(
+                                            "Sony",
+                                            style: TextStyle(
+                                                fontFamily: 'FontPoppins',
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w500),
+                                          ),
                                         ),
                                         DropdownMenuItem(
                                           value: "CANON",
-                                          child: Text("CANON"),
+                                          child: Text(
+                                            "Canon",
+                                            style: TextStyle(
+                                                fontFamily: 'FontPoppins',
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w500),
+                                          ),
                                         ),
                                         DropdownMenuItem(
                                           value: "NIKON",
-                                          child: Text("NIKON"),
+                                          child: Text(
+                                            "Nikon",
+                                            style: TextStyle(
+                                                fontFamily: 'FontPoppins',
+                                                fontSize: 10,
+                                                fontWeight: FontWeight.w500),
+                                          ),
                                         ),
                                       ],
                                       onChanged: (String? value) {
@@ -198,7 +244,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                           ),
 
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
 
                           // Resolusi Foto
@@ -207,12 +253,12 @@ class _RecommendationPageState extends State<RecommendationPage> {
                               children: [
                                 Expanded(
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12.0, vertical: 8.0),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        13, 10, 13, 11),
                                     decoration: BoxDecoration(
-                                      color: Colors.grey[400],
+                                      color: Color(0xFFEAEAEA),
                                       borderRadius: const BorderRadius.all(
-                                          Radius.circular(20)),
+                                          Radius.circular(30)),
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
@@ -221,12 +267,18 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                         const Text(
                                           'Resolusi Foto',
                                           style: TextStyle(
+                                            fontFamily: 'FontPoppins',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20,
+                                            fontSize: 14,
                                           ),
                                         ),
                                         const Text(
-                                            'Resolusi gambar yang semakin besar memungkinkan kemampuan kamera dalam menangkap gambar yang lebih baik.'),
+                                          'Resolusi gambar yang semakin besar memungkinkan kemampuan \nkamera dalam menangkap gambar yang lebih baik.',
+                                          style: TextStyle(
+                                              fontFamily: 'FontPoppins',
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 8),
+                                        ),
                                         Row(
                                           // crossAxisAlignment: WrapCrossAlignment.center,
                                           mainAxisAlignment:
@@ -238,8 +290,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Tidak\nPenting',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
+                                                  fontFamily: 'FontPoppins',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -258,7 +311,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('1'),
+                                                  const Text(
+                                                    '1',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -277,7 +338,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('2'),
+                                                  const Text(
+                                                    '2',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -296,7 +365,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('3'),
+                                                  const Text(
+                                                    '3',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -315,7 +392,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('4'),
+                                                  const Text(
+                                                    '4',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -334,7 +419,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('5'),
+                                                  const Text(
+                                                    '5',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -343,8 +436,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Sangat\nPenting',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
+                                                  fontFamily: 'FontPoppins',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -359,7 +453,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                           ),
 
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
 
                           // Resolusi Video
@@ -368,12 +462,12 @@ class _RecommendationPageState extends State<RecommendationPage> {
                               children: [
                                 Expanded(
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12.0, vertical: 8.0),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        13, 10, 13, 11),
                                     decoration: BoxDecoration(
-                                      color: Colors.grey[400],
+                                      color: Color(0xFFEAEAEA),
                                       borderRadius: const BorderRadius.all(
-                                          Radius.circular(20)),
+                                          Radius.circular(30)),
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
@@ -382,12 +476,18 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                         const Text(
                                           'Resolusi Video',
                                           style: TextStyle(
+                                            fontFamily: 'FontPoppins',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20,
+                                            fontSize: 14,
                                           ),
                                         ),
                                         const Text(
-                                            'Resolusi video yang semakin besar memungkinkan kemampuan kamera dalam menangkap video yang lebih baik.'),
+                                          'Resolusi video yang semakin besar memungkinkan kemampuan \nkamera dalam menangkap video yang lebih baik.',
+                                          style: TextStyle(
+                                              fontFamily: 'FontPoppins',
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 8),
+                                        ),
                                         Row(
                                           // crossAxisAlignment: WrapCrossAlignment.center,
                                           mainAxisAlignment:
@@ -399,8 +499,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Tidak\nPenting',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
+                                                  fontFamily: 'FontPoppins',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -419,7 +520,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('1'),
+                                                  const Text(
+                                                    '1',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -438,7 +547,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('2'),
+                                                  const Text(
+                                                    '2',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -457,7 +574,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('3'),
+                                                  const Text(
+                                                    '3',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -476,7 +601,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('4'),
+                                                  const Text(
+                                                    '4',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -495,7 +628,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('5'),
+                                                  const Text(
+                                                    '5',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -504,8 +645,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Sangat\nPenting',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
+                                                  fontFamily: 'FontPoppins',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -520,7 +662,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                           ),
 
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
 
                           IntrinsicHeight(
@@ -528,12 +670,12 @@ class _RecommendationPageState extends State<RecommendationPage> {
                               children: [
                                 Expanded(
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12.0, vertical: 8.0),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        13, 10, 13, 11),
                                     decoration: BoxDecoration(
-                                      color: Colors.grey[400],
+                                      color: Color(0xFFEAEAEA),
                                       borderRadius: const BorderRadius.all(
-                                          Radius.circular(20)),
+                                          Radius.circular(30)),
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
@@ -542,12 +684,18 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                         const Text(
                                           'ISO',
                                           style: TextStyle(
+                                            fontFamily: 'FontPoppins',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20,
+                                            fontSize: 14,
                                           ),
                                         ),
                                         const Text(
-                                            'Semakin tinggi ISO, maka semakin terang kualitas gambar yang didapatkan di dalam kondisi yang gelap. ISO yang tinggi biasanya sering digunakan ketika ingin menangkap gambar dalam kondisi yang cukup gelap.'),
+                                          'Semakin tinggi ISO, maka semakin terang kualitas gambar yang \ndidapatkan di dalam kondisi yang gelap. ISO yang tinggi biasanya sering \ndigunakan ketika ingin menangkap gambar dalam kondisi yang cukup gelap.',
+                                          style: TextStyle(
+                                              fontFamily: 'FontPoppins',
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 8),
+                                        ),
                                         Row(
                                           // crossAxisAlignment: WrapCrossAlignment.center,
                                           mainAxisAlignment:
@@ -559,8 +707,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Tidak\nPenting',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
+                                                  fontFamily: 'FontPoppins',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -577,7 +726,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('1'),
+                                                  const Text(
+                                                    '1',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -594,7 +751,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('2'),
+                                                  const Text(
+                                                    '2',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -611,7 +776,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('3'),
+                                                  const Text(
+                                                    '3',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -628,7 +801,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('4'),
+                                                  const Text(
+                                                    '4',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -645,7 +826,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('5'),
+                                                  const Text(
+                                                    '5',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -654,8 +843,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Sangat\nPenting',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
+                                                  fontFamily: 'FontPoppins',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -670,7 +860,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                           ),
 
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
 
                           IntrinsicHeight(
@@ -678,12 +868,12 @@ class _RecommendationPageState extends State<RecommendationPage> {
                               children: [
                                 Expanded(
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12.0, vertical: 8.0),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        13, 10, 13, 11),
                                     decoration: BoxDecoration(
-                                      color: Colors.grey[400],
+                                      color: Color(0xFFEAEAEA),
                                       borderRadius: const BorderRadius.all(
-                                          Radius.circular(20)),
+                                          Radius.circular(30)),
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
@@ -692,12 +882,18 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                         const Text(
                                           'Baterai',
                                           style: TextStyle(
+                                            fontFamily: 'FontPoppins',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20,
+                                            fontSize: 14,
                                           ),
                                         ),
                                         const Text(
-                                            'Semakin besar kapasitas baterai, maka semakin lama pula daya tahan kamera saat digunakan.'),
+                                          'Semakin besar kapasitas baterai, maka semakin lama pula daya \ntahan kamera saat digunakan.',
+                                          style: TextStyle(
+                                              fontFamily: 'FontPoppins',
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 8),
+                                        ),
                                         Row(
                                           // crossAxisAlignment: WrapCrossAlignment.center,
                                           mainAxisAlignment:
@@ -709,8 +905,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Tidak\nPenting',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
+                                                  fontFamily: 'FontPoppins',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -727,7 +924,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('1'),
+                                                  const Text(
+                                                    '1',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -744,7 +949,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('2'),
+                                                  const Text(
+                                                    '2',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -761,7 +974,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('3'),
+                                                  const Text(
+                                                    '3',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -778,7 +999,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('4'),
+                                                  const Text(
+                                                    '4',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -795,7 +1024,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('5'),
+                                                  const Text(
+                                                    '5',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -804,8 +1041,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Sangat\nPenting',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
+                                                  fontFamily: 'FontPoppins',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -820,7 +1058,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                           ),
 
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
 
                           IntrinsicHeight(
@@ -828,12 +1066,12 @@ class _RecommendationPageState extends State<RecommendationPage> {
                               children: [
                                 Expanded(
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12.0, vertical: 8.0),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        13, 10, 13, 11),
                                     decoration: BoxDecoration(
-                                      color: Colors.grey[400],
+                                      color: Color(0xFFEAEAEA),
                                       borderRadius: const BorderRadius.all(
-                                          Radius.circular(20)),
+                                          Radius.circular(30)),
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
@@ -842,12 +1080,18 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                         const Text(
                                           'Berat',
                                           style: TextStyle(
+                                            fontFamily: 'FontPoppins',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20,
+                                            fontSize: 14,
                                           ),
                                         ),
                                         const Text(
-                                            'Spesifikasi kamera berpengaruh terhadap berat kamera. Semakin besar spesifikasi kamera, maka semakin berat pula bobot kamera.'),
+                                          'Spesifikasi kamera berpengaruh terhadap berat kamera. Semakin \nbesar spesifikasi kamera, maka semakin berat pula bobot kamera.',
+                                          style: TextStyle(
+                                              fontFamily: 'FontPoppins',
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 8),
+                                        ),
                                         Row(
                                           // crossAxisAlignment: WrapCrossAlignment.center,
                                           mainAxisAlignment:
@@ -859,8 +1103,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Tidak\nPenting',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
+                                                  fontFamily: 'FontPoppins',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -877,7 +1122,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('1'),
+                                                  const Text(
+                                                    '1',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -894,7 +1147,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('2'),
+                                                  const Text(
+                                                    '2',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -911,7 +1172,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('3'),
+                                                  const Text(
+                                                    '3',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -928,7 +1197,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('4'),
+                                                  const Text(
+                                                    '4',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -945,7 +1222,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('5'),
+                                                  const Text(
+                                                    '5',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -954,8 +1239,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Sangat\nPenting',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
-                                                  fontSize: 12,
+                                                  fontFamily: 'FontPoppins',
+                                                  fontWeight: FontWeight.w700,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -970,7 +1256,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                           ),
 
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
 
                           IntrinsicHeight(
@@ -978,12 +1264,12 @@ class _RecommendationPageState extends State<RecommendationPage> {
                               children: [
                                 Expanded(
                                   child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12.0, vertical: 8.0),
+                                    padding: const EdgeInsets.fromLTRB(
+                                        13, 10, 13, 11),
                                     decoration: BoxDecoration(
-                                      color: Colors.grey[400],
+                                      color: Color(0xFFEAEAEA),
                                       borderRadius: const BorderRadius.all(
-                                          Radius.circular(20)),
+                                          Radius.circular(30)),
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
@@ -992,12 +1278,18 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                         const Text(
                                           'Harga',
                                           style: TextStyle(
+                                            fontFamily: 'FontPoppins',
                                             fontWeight: FontWeight.w600,
-                                            fontSize: 20,
+                                            fontSize: 14,
                                           ),
                                         ),
                                         const Text(
-                                            'Pada umumnya, harga kamera berkisar antara Rp2jt hingga Rp20jt. Semakin besar harga kamera, potensi kamera juga semakin besar.'),
+                                          'Pada umumnya, harga kamera berkisar antara Rp2jt hingga Rp20jt. \nSemakin besar harga kamera, potensi kamera juga semakin besar.',
+                                          style: TextStyle(
+                                              fontFamily: 'FontPoppins',
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 8),
+                                        ),
                                         Row(
                                           // crossAxisAlignment: WrapCrossAlignment.center,
                                           mainAxisAlignment:
@@ -1009,9 +1301,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Paling\nMurah',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.w600,
+                                                  fontWeight: FontWeight.w700,
                                                   fontFamily: 'FontPoppins',
-                                                  fontSize: 12,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -1028,7 +1320,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('1'),
+                                                  const Text(
+                                                    '1',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -1045,7 +1345,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('2'),
+                                                  const Text(
+                                                    '2',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -1062,7 +1370,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('3'),
+                                                  const Text(
+                                                    '3',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -1079,7 +1395,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('4'),
+                                                  const Text(
+                                                    '4',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -1096,7 +1420,15 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                       });
                                                     },
                                                   ),
-                                                  const Text('5'),
+                                                  const Text(
+                                                    '5',
+                                                    style: TextStyle(
+                                                        fontFamily:
+                                                            'FontPoppins',
+                                                        fontSize: 10,
+                                                        fontWeight:
+                                                            FontWeight.w500),
+                                                  ),
                                                 ],
                                               ),
                                             ),
@@ -1105,9 +1437,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                                 'Paling\nMahal',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.w600,
+                                                  fontWeight: FontWeight.w700,
                                                   fontFamily: 'FontPoppins',
-                                                  fontSize: 12,
+                                                  fontSize: 10,
                                                 ),
                                               ),
                                             ),
@@ -1122,7 +1454,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                           ),
 
                           const SizedBox(
-                            height: 20,
+                            height: 10,
                           ),
 
                           StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
@@ -1143,7 +1475,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                   children: [
                                     InkWell(
                                       child: Container(
-                                        width: 200,
+                                        margin:
+                                            EdgeInsets.fromLTRB(0, 20, 0, 30),
+                                        width: 150,
                                         height: 45,
                                         alignment: Alignment.center,
                                         decoration: const BoxDecoration(
