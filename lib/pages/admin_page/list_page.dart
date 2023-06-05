@@ -35,8 +35,62 @@ class _DataListPageState extends State<DataListPage> {
   }
 
   Future<void> deleteCamera(String id) async {
-    await cameraCollection.doc(id).delete();
-    getCamera();
+    showDialog(
+      context: context,
+      builder: (context) => Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                "Hapus",
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              SizedBox(
+                height: 16.0,
+              ),
+              Text(
+                "Apakah anda yakin ingin menghapus data tersebut?",
+              ),
+              SizedBox(
+                height: 8.0,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.red,
+                      ),
+                      child: const Text("Tidak"),
+                    ),
+                  ),
+                  const SizedBox(width: 16.0),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        final navigator = Navigator.of(context);
+                        await cameraCollection.doc(id).delete();
+                        getCamera();
+                        navigator.pop();
+                      },
+                      child: const Text("Ya"),
+                    ),
+                  ),
+                ],
+              )
+            ],
+          ),
+        ),
+      ),
+    );
   }
 
   @override
@@ -130,6 +184,10 @@ class _DataListPageState extends State<DataListPage> {
                     ],
                   ),
                 ],
+              ),
+              Align(
+                alignment: Alignment.centerRight,
+                child: Text("Banyak data : ${cameraList.length}"),
               ),
               const SizedBox(
                 height: 18,
