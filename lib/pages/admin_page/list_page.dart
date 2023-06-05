@@ -1,6 +1,7 @@
 import 'package:camera_market_app/pages/admin_page/update_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class DataListPage extends StatefulWidget {
   const DataListPage({Key? key}) : super(key: key);
@@ -79,8 +80,8 @@ class _DataListPageState extends State<DataListPage> {
           child: SizedBox(
             height: 30,
             width: 124.09,
-            child: Image.asset(
-              'assets/icons/Logo.png',
+            child: SvgPicture.asset(
+              'assets/icons/logo.svg',
             ),
           ),
         ),
@@ -203,7 +204,7 @@ class _DataListPageState extends State<DataListPage> {
                               fontSize: 14,
                               fontFamily: 'FontPoppins',
                               fontWeight: FontWeight.w500,
-                              color: Colors.black,
+                              color: Color(0xFF000000),
                             ),
                             child: Text(documentSnapshot!['namaProduk']),
                           ),

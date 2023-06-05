@@ -2,6 +2,14 @@ import 'package:camera_market_app/widgets/camera_item.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:camera_market_app/pages/home_page.dart';
+import 'package:camera_market_app/pages/about_page.dart';
+import 'package:camera_market_app/pages/admin_page/admin_page.dart';
+import 'package:camera_market_app/pages/recommendation_page.dart';
+import 'package:camera_market_app/pages/catalog_page.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+
 class ResultPage extends StatefulWidget {
   const ResultPage({super.key, required this.waspasTempResult});
   static const routeName = '/resultPageRoute';
@@ -16,6 +24,15 @@ class _ResultPageState extends State<ResultPage> {
   List<List> waspasResult = [];
   int? limit;
   bool switchTop5 = false;
+
+  int selectedIndex = 2;
+
+  final List<IconData> icons = const [
+    Icons.home,
+    Icons.list_alt,
+    Icons.info,
+    Icons.person,
+  ];
 
   @override
   void initState() {
@@ -37,31 +54,37 @@ class _ResultPageState extends State<ResultPage> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.transparent,
+        foregroundColor: Colors.black,
         elevation: 0.0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+        leading: Padding(
+          padding: EdgeInsets.only(top: 0),
+          child: IconButton(
+            icon: Image.asset(
+              'assets/icons/backarrow.png',
+              color: Color(0xFF262626),
+            ),
+            onPressed: () => Navigator.pop(context),
           ),
-          onPressed: () => Navigator.pop(context),
         ),
-        title: SizedBox(
-          height: 50,
-          width: 90,
-          child: Image.asset(
-            'assets/icons/Logo.png',
-            color: Colors.black,
+        title: Padding(
+          padding: EdgeInsets.only(top: 0),
+          child: SizedBox(
+            height: 30,
+            width: 124.09,
+            child: SvgPicture.asset(
+              'assets/icons/logo.svg',
+            ),
           ),
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
         alignment: Alignment.bottomCenter,
         decoration: BoxDecoration(
-          color: Colors.grey[400],
+          color: Color(0xFFEAEAEA),
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
           ),
         ),
         child: Column(
@@ -113,6 +136,62 @@ class _ResultPageState extends State<ResultPage> {
             ),
           ],
         ),
+      ),
+      backgroundColor: selectedIndex == 0 ? Colors.white : Colors.white,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        elevation: 5,
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const RecommendationPage()),
+          );
+        },
+        child: CircleAvatar(
+          backgroundColor: Colors.black,
+          radius: 24,
+          child: Image.asset(
+            "assets/icons/tumbup.png",
+            width: 20,
+          ),
+        ),
+      ),
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        activeIndex: selectedIndex,
+        backgroundColor: Colors.white,
+        activeColor: Colors.grey,
+        inactiveColor: Colors.grey,
+        gapLocation: GapLocation.center,
+        icons: icons,
+        leftCornerRadius: 24,
+        rightCornerRadius: 24,
+        notchSmoothness: NotchSmoothness.sharpEdge,
+        notchMargin: 0,
+        shadow: const Shadow(
+          color: Colors.grey,
+          offset: Offset(0, 1),
+          blurRadius: 10,
+        ),
+        onTap: (value) {
+          setState(() {
+            selectedIndex = value;
+          });
+
+          switch (selectedIndex) {
+            case 0:
+              Navigator.pushReplacementNamed(context, HomePage.routeName);
+              break;
+            case 1:
+              Navigator.pushReplacementNamed(context, CatalogPage.routeName);
+              break;
+            case 2:
+              Navigator.pushReplacementNamed(context, AboutPage.routeName);
+              break;
+            case 3:
+              Navigator.pushReplacementNamed(context, AdminPage.routeName);
+              break;
+          }
+        },
       ),
     );
   }

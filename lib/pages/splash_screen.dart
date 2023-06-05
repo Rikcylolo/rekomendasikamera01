@@ -1,3 +1,4 @@
+import 'package:camera_market_app/pages/home_page.dart';
 import 'package:camera_market_app/pages/main_page.dart';
 import 'package:flutter/material.dart';
 
@@ -15,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       Navigator.of(context).pushReplacement(
         MaterialPageRoute(
-          builder: (context) => const MainPage(),
+          builder: (context) => const HomePage(),
         ),
       );
     });

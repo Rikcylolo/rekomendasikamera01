@@ -29,7 +29,7 @@ class CameraItem extends StatelessWidget {
               ),
       child: Container(
         padding: const EdgeInsets.fromLTRB(8, 30, 8, 0),
-        margin: const EdgeInsets.all(8.0),
+        margin: const EdgeInsets.fromLTRB(6, 0, 6, 15),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),

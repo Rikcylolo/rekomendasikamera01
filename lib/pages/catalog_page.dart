@@ -3,6 +3,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
+import 'package:camera_market_app/pages/home_page.dart';
+import 'package:camera_market_app/pages/about_page.dart';
+import 'package:camera_market_app/pages/admin_page/admin_page.dart';
+import 'package:camera_market_app/pages/recommendation_page.dart';
+
 class CatalogPage extends StatefulWidget {
   const CatalogPage({Key? key}) : super(key: key);
   static const routeName = '/catalogPageRoute';
@@ -14,6 +20,15 @@ class CatalogPage extends StatefulWidget {
 class _CatalogPageState extends State<CatalogPage> {
   final cameraCollection = FirebaseFirestore.instance.collection('camera');
   final TextEditingController searchInputController = TextEditingController();
+
+  int selectedIndex = 1;
+
+  final List<IconData> icons = [
+    Icons.home,
+    Icons.list_alt,
+    Icons.info,
+    Icons.person,
+  ];
 
   List<QueryDocumentSnapshot<Map<String, dynamic>>> cameraList = [];
   List<QueryDocumentSnapshot<Map<String, dynamic>>> cameraTempList = [];
@@ -89,14 +104,15 @@ class _CatalogPageState extends State<CatalogPage> {
           child: SizedBox(
             height: 30,
             width: 124.09,
-            child: Image.asset(
-              'assets/icons/Logo.png',
+            child: SvgPicture.asset(
+              'assets/icons/logo.svg',
             ),
           ),
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.all(20.0),
+        height: size.height,
+        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
         alignment: Alignment.bottomCenter,
         decoration: const BoxDecoration(
           color: Color(0xFFEAEAEA),
@@ -255,7 +271,8 @@ class _CatalogPageState extends State<CatalogPage> {
                 'Produk Kamera',
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
-                  fontSize: 16,
+                  fontFamily: 'FontPoppins',
+                  fontSize: 14,
                 ),
               ),
             ),
@@ -282,6 +299,62 @@ class _CatalogPageState extends State<CatalogPage> {
               ),
           ],
         ),
+      ),
+      backgroundColor: Colors.white,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: Colors.white,
+        elevation: 5,
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => const RecommendationPage()),
+          );
+        },
+        child: CircleAvatar(
+          backgroundColor: Color(0xFF404040),
+          radius: 24,
+          child: SvgPicture.asset(
+            "assets/icons/tombup.svg",
+            width: 25,
+          ),
+        ),
+      ),
+      bottomNavigationBar: AnimatedBottomNavigationBar(
+        activeIndex: selectedIndex,
+        backgroundColor: Colors.white,
+        activeColor: Colors.black,
+        inactiveColor: Colors.grey,
+        gapLocation: GapLocation.center,
+        icons: icons,
+        leftCornerRadius: 24,
+        rightCornerRadius: 24,
+        notchSmoothness: NotchSmoothness.sharpEdge,
+        notchMargin: 0,
+        shadow: const Shadow(
+          color: Colors.grey,
+          offset: Offset(0, 1),
+          blurRadius: 10,
+        ),
+        onTap: (value) {
+          setState(() {
+            selectedIndex = value;
+          });
+
+          switch (selectedIndex) {
+            case 0:
+              Navigator.pushReplacementNamed(context, HomePage.routeName);
+              break;
+            // case 1:
+            //   Navigator.pushReplacementNamed(context, CatalogPage.routeName);
+            //   break;
+            case 2:
+              Navigator.pushReplacementNamed(context, AboutPage.routeName);
+              break;
+            case 3:
+              Navigator.pushReplacementNamed(context, AdminPage.routeName);
+              break;
+          }
+        },
       ),
     );
   }

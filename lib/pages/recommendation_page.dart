@@ -1006,10 +1006,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                           children: [
                                             const Expanded(
                                               child: Text(
-                                                'Tidak\nPenting',
+                                                'Paling\nMurah',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontFamily: 'FontPoppins',
                                                   fontSize: 12,
                                                 ),
                                               ),
@@ -1101,10 +1102,11 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                             ),
                                             const Expanded(
                                               child: Text(
-                                                'Sangat\nPenting',
+                                                'Paling\nMahal',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
-                                                  fontWeight: FontWeight.bold,
+                                                  fontWeight: FontWeight.w600,
+                                                  fontFamily: 'FontPoppins',
                                                   fontSize: 12,
                                                 ),
                                               ),

@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UpdatePage extends StatefulWidget {
@@ -83,8 +84,8 @@ class _UpdatePageState extends State<UpdatePage> {
           child: SizedBox(
             height: 30,
             width: 124.09,
-            child: Image.asset(
-              'assets/icons/Logo.png',
+            child: SvgPicture.asset(
+              'assets/icons/logo.svg',
             ),
           ),
         ),

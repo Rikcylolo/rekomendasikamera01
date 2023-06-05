@@ -1,6 +1,7 @@
 import 'package:camera_market_app/pages/admin_page/edit_data_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class AdminPage extends StatefulWidget {
   const AdminPage({Key? key}) : super(key: key);
@@ -44,15 +45,25 @@ class _AdminPageState extends State<AdminPage> {
         toolbarHeight: 72,
         centerTitle: true,
         backgroundColor: Colors.transparent,
-        foregroundColor: Colors.black,
+        foregroundColor: Colors.red,
         elevation: 0.0,
+        leading: Padding(
+          padding: EdgeInsets.only(top: 0),
+          child: IconButton(
+            icon: Image.asset(
+              'assets/icons/backarrow.png',
+              color: Color(0xFF262626),
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
         title: Padding(
           padding: EdgeInsets.only(top: 0),
           child: SizedBox(
             height: 30,
             width: 124.09,
-            child: Image.asset(
-              'assets/icons/Logo.png',
+            child: SvgPicture.asset(
+              'assets/icons/logo.svg',
             ),
           ),
         ),
