@@ -18,8 +18,8 @@ class EditDataPage extends StatelessWidget {
         leading: Padding(
           padding: EdgeInsets.only(top: 0),
           child: IconButton(
-            icon: Image.asset(
-              'assets/icons/backarrow.png',
+            icon: SvgPicture.asset(
+              'assets/icons/backarrow.svg',
               color: Color(0xFF262626),
             ),
             onPressed: () => Navigator.pop(context),

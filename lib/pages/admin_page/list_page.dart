@@ -34,29 +34,35 @@ class _DataListPageState extends State<DataListPage> {
     });
   }
 
-  Future<void> deleteCamera(String id) async {
+  Future<void> deleteCamera(
+      QueryDocumentSnapshot<Map<String, dynamic>> documentSnapshot) async {
     showDialog(
       context: context,
       builder: (context) => Dialog(
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(20.0),
         ),
         child: Padding(
-          padding: const EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(20.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 "Hapus",
                 style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                ),
+                    fontFamily: 'FontPoppins',
+                    fontWeight: FontWeight.w600,
+                    fontSize: 16),
               ),
               SizedBox(
                 height: 16.0,
               ),
               Text(
-                "Apakah anda yakin ingin menghapus data tersebut?",
+                "Apakah anda yakin ingin menghapus kamera ${documentSnapshot!['namaProduk']}?",
+                style: TextStyle(
+                    fontFamily: 'FontPoppins',
+                    fontSize: 14,
+                    fontWeight: FontWeight.w400),
               ),
               SizedBox(
                 height: 8.0,
@@ -67,21 +73,46 @@ class _DataListPageState extends State<DataListPage> {
                     child: ElevatedButton(
                       onPressed: () => Navigator.of(context).pop(),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red,
+                          backgroundColor: Color(0xFF1F1F1F),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
+                      child: const Text(
+                        "Tidak",
+                        style: TextStyle(
+                            fontFamily: 'FontPoppins',
+                            fontWeight: FontWeight.w600),
                       ),
-                      child: const Text("Tidak"),
                     ),
                   ),
                   const SizedBox(width: 16.0),
                   Expanded(
                     child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color(0xFFEAEAEA),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10))),
                       onPressed: () async {
                         final navigator = Navigator.of(context);
-                        await cameraCollection.doc(id).delete();
+                        await cameraCollection
+                            .doc(documentSnapshot.id)
+                            .delete();
                         getCamera();
                         navigator.pop();
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content:
+                                Text('Anda telah berhasil menghapus buku.'),
+                            duration: Duration(milliseconds: 500),
+                          ),
+                        );
                       },
-                      child: const Text("Ya"),
+                      child: const Text(
+                        "Ya",
+                        style: TextStyle(
+                            fontFamily: 'FontPoppins',
+                            color: Color(0xFF1F1F1F),
+                            fontWeight: FontWeight.w600),
+                      ),
                     ),
                   ),
                 ],
@@ -122,9 +153,8 @@ class _DataListPageState extends State<DataListPage> {
         leading: Padding(
           padding: EdgeInsets.only(top: 0),
           child: IconButton(
-            icon: Image.asset(
-              'assets/icons/backarrow.png',
-              color: Color(0xFF262626),
+            icon: SvgPicture.asset(
+              'assets/icons/backarrow.svg',
             ),
             onPressed: () => Navigator.pop(context),
           ),
@@ -187,7 +217,13 @@ class _DataListPageState extends State<DataListPage> {
               ),
               Align(
                 alignment: Alignment.centerRight,
-                child: Text("Banyak data : ${cameraList.length}"),
+                child: Text(
+                  "Banyak data : ${cameraList.length}",
+                  style: TextStyle(
+                      fontFamily: 'FontPoppins',
+                      fontWeight: FontWeight.w500,
+                      fontSize: 12),
+                ),
               ),
               const SizedBox(
                 height: 18,
@@ -274,15 +310,8 @@ class _DataListPageState extends State<DataListPage> {
                                 IconButton(
                                   icon: const Icon(Icons.delete),
                                   onPressed: () {
-                                    deleteCamera(documentSnapshot.id);
+                                    deleteCamera(documentSnapshot);
                                     searchInputController.clear();
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      const SnackBar(
-                                        content: Text(
-                                            'Anda telah berhasil menghapus buku.'),
-                                        duration: Duration(milliseconds: 500),
-                                      ),
-                                    );
                                   },
                                 ),
                               ],
