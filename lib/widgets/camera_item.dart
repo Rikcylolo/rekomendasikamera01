@@ -1,6 +1,7 @@
 import 'package:camera_market_app/pages/detail_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class CameraItem extends StatelessWidget {
   final QueryDocumentSnapshot<Map<String, dynamic>> documentSnapshot;
@@ -28,7 +29,7 @@ class CameraItem extends StatelessWidget {
                 ),
               ),
       child: Container(
-        padding: const EdgeInsets.fromLTRB(8, 30, 8, 0),
+        padding: const EdgeInsets.fromLTRB(8, 15, 8, 0),
         margin: const EdgeInsets.fromLTRB(6, 0, 6, 15),
         decoration: BoxDecoration(
           color: Colors.white,
@@ -44,24 +45,43 @@ class CameraItem extends StatelessWidget {
         ),
         child: Stack(
           children: [
-            Align(
-              alignment: Alignment.topCenter,
-              child: Image.asset(
-                "assets/images/background_image.png",
-                fit: BoxFit.fill,
-                width: 130,
-                height: 125,
+            if (q != null)
+              Align(
+                alignment: Alignment.topRight,
+                child: Text(
+                  "Nilai: ${q!.toStringAsFixed(3)}   ",
+                  textAlign: TextAlign.left,
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                        fontSize: 10,
+                        color: Color(0xFF262626),
+                        fontFamily: 'FontPoppins',
+                        fontWeight: FontWeight.w600,
+                      ),
+                ),
               ),
-            ),
+            Align(
+                alignment: Alignment.topCenter,
+                child: Container(
+                  margin: EdgeInsets.only(top: 30),
+                  alignment: Alignment.topCenter,
+                  child: Image.asset(
+                    "assets/images/background_image.png",
+                    fit: BoxFit.fill,
+                    width: 125,
+                  ),
+                )),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                SizedBox(height: 0),
                 Align(
                   alignment: Alignment.center,
                   child: Container(
                     width: 110,
                     height: 110,
-                    margin: EdgeInsets.only(bottom: 20),
+                    margin: EdgeInsets.fromLTRB(0, 30, 0, 15),
                     child: Image.network(
                       documentSnapshot['gambar'],
                       width: size.width * 0.24,
@@ -83,22 +103,26 @@ class CameraItem extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 20.0),
-                Text(
-                  documentSnapshot['namaProduk'],
-                  textAlign: TextAlign.left,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        fontSize: 10,
-                        color: Color(0xFF262626),
-                        fontFamily: 'FontPoppins',
-                        fontWeight: FontWeight.w400,
-                      ),
+                Padding(
+                  padding: EdgeInsets.only(left: 8),
+                  child: Text(
+                    documentSnapshot['namaProduk'],
+                    textAlign: TextAlign.left,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                          fontSize: 10,
+                          color: Color(0xFF262626),
+                          fontFamily: 'FontPoppins',
+                          fontWeight: FontWeight.w400,
+                        ),
+                  ),
                 ),
                 SizedBox(height: 4.0),
-                if (q != null)
-                  Text(
-                    "Nilai: ${q!.toStringAsFixed(3)}",
+                Padding(
+                  padding: EdgeInsets.only(left: 8.0),
+                  child: Text(
+                    "Rp${NumberFormat("#,##0", "en_US").format(documentSnapshot['harga'])}",
                     textAlign: TextAlign.left,
                     maxLines: 2,
                     overflow: TextOverflow.ellipsis,
@@ -109,19 +133,7 @@ class CameraItem extends StatelessWidget {
                           fontWeight: FontWeight.w600,
                         ),
                   ),
-                SizedBox(height: 4.0),
-                Text(
-                  "Rp. ${documentSnapshot['harga']}",
-                  textAlign: TextAlign.left,
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                        fontSize: 10,
-                        color: Color(0xFF262626),
-                        fontFamily: 'FontPoppins',
-                        fontWeight: FontWeight.w600,
-                      ),
-                ),
+                )
               ],
             ),
           ],

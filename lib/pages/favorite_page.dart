@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../widgets/camera_item.dart';
@@ -57,33 +58,38 @@ class _FavoritePageState extends State<FavoritePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 72,
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+        leading: Padding(
+          padding: EdgeInsets.only(top: 0),
+          child: IconButton(
+            icon: SvgPicture.asset(
+              'assets/icons/backarrow.svg',
+            ),
+            onPressed: () => Navigator.pop(context),
           ),
-          onPressed: () => Navigator.pop(context),
         ),
-        title: SizedBox(
-          height: 50,
-          width: 90,
-          child: Image.asset(
-            'assets/icons/Logo.png',
-            color: Colors.black,
+        title: Padding(
+          padding: EdgeInsets.only(top: 0),
+          child: SizedBox(
+            height: 30,
+            width: 124.09,
+            child: SvgPicture.asset(
+              'assets/icons/logo.svg',
+            ),
           ),
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.all(18.0),
+        padding: const EdgeInsets.all(20.0),
         alignment: Alignment.bottomCenter,
         decoration: BoxDecoration(
-          color: Colors.grey[400],
+          color: Color(0xFFEAEAEA),
           borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(20.0),
-            topRight: Radius.circular(20.0),
+            topLeft: Radius.circular(30.0),
+            topRight: Radius.circular(30.0),
           ),
         ),
         child: isLoading
@@ -97,8 +103,7 @@ class _FavoritePageState extends State<FavoritePage> {
                 : GridView.builder(
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                    ),
+                            crossAxisCount: 2, childAspectRatio: 0.72),
                     itemCount: cameraList.length,
                     itemBuilder: (context, index) {
                       final QueryDocumentSnapshot<Map<String, dynamic>>

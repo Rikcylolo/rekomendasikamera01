@@ -99,6 +99,16 @@ class _CatalogPageState extends State<CatalogPage> {
         backgroundColor: Colors.transparent,
         foregroundColor: Colors.black,
         elevation: 0.0,
+        leading: Padding(
+          padding: EdgeInsets.only(top: 0),
+          child: IconButton(
+            icon: SvgPicture.asset(
+              'assets/icons/backarrow.svg',
+              color: Color(0xFF262626),
+            ),
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
         title: Padding(
           padding: EdgeInsets.only(top: 0),
           child: SizedBox(
