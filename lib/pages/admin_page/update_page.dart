@@ -113,7 +113,7 @@ class _UpdatePageState extends State<UpdatePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       Text(
-                        'Selamat datang, Admin <adminID>',
+                        'Selamat datang Admin',
                         style: TextStyle(
                           fontFamily: 'FontPoppins',
                           fontWeight: FontWeight.w600,
@@ -785,7 +785,7 @@ class _UpdatePageState extends State<UpdatePage> {
                       scaffoldMessenger.showSnackBar(
                         const SnackBar(content: Text('Data sudah diupdate')),
                       );
-                      navigator.pop();
+                      Navigator.popAndPushNamed(context, 'list_page');
                     },
                     child: Container(
                       width: 150,

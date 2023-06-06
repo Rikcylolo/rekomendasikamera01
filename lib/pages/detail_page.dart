@@ -9,14 +9,16 @@ import 'package:camera_market_app/pages/about_page.dart';
 import 'package:camera_market_app/pages/admin_page/admin_page.dart';
 import 'package:camera_market_app/pages/recommendation_page.dart';
 import 'package:camera_market_app/pages/catalog_page.dart';
+import 'package:intl/intl.dart';
 
 class DetailPage extends StatefulWidget {
   final DocumentSnapshot<Map<String, dynamic>> documentSnapshot;
 
-  const DetailPage({super.key, required this.documentSnapshot});
+  const DetailPage({Key? key, required this.documentSnapshot})
+      : super(key: key);
 
   @override
-  State<DetailPage> createState() => _DetailPageState();
+  _DetailPageState createState() => _DetailPageState();
 }
 
 class _DetailPageState extends State<DetailPage> {
@@ -24,7 +26,6 @@ class _DetailPageState extends State<DetailPage> {
       FirebaseFirestore.instance.collection('camera');
 
   bool isFavorite = false;
-
   int selectedIndex = 1;
 
   final List<IconData> icons = [
@@ -62,8 +63,8 @@ class _DetailPageState extends State<DetailPage> {
       });
       return;
     }
-    final List<String> result = getFavorites;
 
+    final List<String> result = getFavorites;
     if (isFavorite) {
       result.removeWhere((item) => item == widget.documentSnapshot.id);
       prefs.setStringList("favorites", result);
@@ -81,11 +82,10 @@ class _DetailPageState extends State<DetailPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((timeStamp) {
       getFavorite();
     });
-
-    super.initState();
   }
 
   @override
@@ -94,21 +94,27 @@ class _DetailPageState extends State<DetailPage> {
 
     return Scaffold(
       appBar: AppBar(
+        toolbarHeight: 72,
         centerTitle: true,
         backgroundColor: Colors.transparent,
         elevation: 0.0,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back,
-            color: Colors.black,
+        leading: Padding(
+          padding: EdgeInsets.only(top: 0),
+          child: IconButton(
+            icon: SvgPicture.asset(
+              'assets/icons/backarrow.svg',
+            ),
+            onPressed: () => Navigator.pop(context),
           ),
-          onPressed: () => Navigator.pop(context),
         ),
-        title: SizedBox(
-          height: 50,
-          width: 90,
-          child: SvgPicture.asset(
-            'assets/icons/logo.svg',
+        title: Padding(
+          padding: EdgeInsets.only(top: 0),
+          child: SizedBox(
+            height: 30,
+            width: 124.09,
+            child: SvgPicture.asset(
+              'assets/icons/logo.svg',
+            ),
           ),
         ),
         actions: [
@@ -117,7 +123,7 @@ class _DetailPageState extends State<DetailPage> {
             icon: isFavorite
                 ? const Icon(
                     Icons.favorite,
-                    color: Colors.redAccent,
+                    color: Colors.black,
                   )
                 : const Icon(
                     Icons.favorite_border,
@@ -127,148 +133,207 @@ class _DetailPageState extends State<DetailPage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: StreamBuilder(
-          stream: camera.snapshots(),
-          builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
-            return Column(
-              mainAxisAlignment: MainAxisAlignment.end,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            Stack(
               children: [
-                Stack(
-                  children: [
-                    Container(
-                      height: 660,
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[400],
-                        borderRadius: const BorderRadius.only(
-                          topLeft: Radius.circular(20.0),
-                          topRight: Radius.circular(20.0),
+                Container(
+                  height: 660,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    color: Color(0xFFEAEAEA),
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(30.0),
+                      topRight: Radius.circular(30.0),
+                    ),
+                  ),
+                ),
+                Positioned(
+                  top: 20.0,
+                  bottom: 0.0,
+                  left: 0.0,
+                  right: 0.0,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                          height: 360,
+                          alignment: Alignment.center,
+                          decoration: const BoxDecoration(
+                            color: Color(0xFFEAEAEA),
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(30.0),
+                              topRight: Radius.circular(30.0),
+                            ),
+                          ),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                flex: 6,
+                                child: Transform.scale(
+                                  scale: 0.8,
+                                  child: Image.network(
+                                    widget.documentSnapshot['gambar'],
+                                    loadingBuilder: (context, child, event) {
+                                      if (event == null) {
+                                        return child;
+                                      } else {
+                                        return SizedBox(
+                                          width: size.width * 0.24,
+                                          height: size.width * 0.24,
+                                          child: Center(
+                                            child: CircularProgressIndicator(
+                                              value: event
+                                                      .cumulativeBytesLoaded /
+                                                  (event.expectedTotalBytes ??
+                                                      1),
+                                              color: Theme.of(context)
+                                                  .primaryColor,
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    },
+                                    errorBuilder: (context, url, error) => Icon(
+                                      Icons.broken_image_outlined,
+                                      color: Colors.grey,
+                                      size: size.width * 0.24,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Text(
+                                widget.documentSnapshot['namaProduk'],
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: 'FontPoppins',
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              Text.rich(
+                                TextSpan(
+                                  children: [
+                                    TextSpan(
+                                      text: "Rp",
+                                      style: TextStyle(
+                                        fontSize: 14,
+                                        color: Color(0xFF262626),
+                                        fontFamily: 'FontPoppins',
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: NumberFormat("#,##0", "en_US")
+                                          .format(
+                                              widget.documentSnapshot['harga'])
+                                          .replaceAll(",", ".")
+                                          .substring(
+                                              0,
+                                              NumberFormat("#,##0", "en_US")
+                                                      .format(widget
+                                                              .documentSnapshot[
+                                                          'harga'])
+                                                      .replaceAll(",", ".")
+                                                      .length -
+                                                  3),
+                                      style: const TextStyle(
+                                        fontSize: 17,
+                                        color: Color(0xFF262626),
+                                        fontFamily: 'FontPoppins',
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                    TextSpan(
+                                      text: NumberFormat("#,##0", "en_US")
+                                          .format(
+                                              widget.documentSnapshot['harga'])
+                                          .replaceAll(",", ".")
+                                          .substring(
+                                              NumberFormat("#,##0", "en_US")
+                                                      .format(widget
+                                                              .documentSnapshot[
+                                                          'harga'])
+                                                      .replaceAll(",", ".")
+                                                      .length -
+                                                  3),
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                        color: Color(0xFF262626),
+                                        fontFamily: 'FontPoppins',
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                textAlign: TextAlign.left,
+                                maxLines: 2,
+                                overflow: TextOverflow.ellipsis,
+                              ),
+                              SizedBox(
+                                height: 15,
+                              )
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                    Positioned(
-                      top: 0.0,
-                      bottom: 0.0,
-                      left: 0.0,
-                      right: 0.0,
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                              padding: const EdgeInsets.all(8.0),
-                              height: 360,
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[400],
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20.0),
-                                  topRight: Radius.circular(20.0),
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Expanded(
-                                    flex: 6,
-                                    child: Image.network(
-                                      widget.documentSnapshot['gambar'],
-                                      loadingBuilder: (context, child, event) =>
-                                          event == null
-                                              ? child
-                                              : SizedBox(
-                                                  width: size.width * 0.24,
-                                                  height: size.width * 0.24,
-                                                  child: Center(
-                                                    child: SizedBox(
-                                                      width: size.width * 0.24,
-                                                      height: size.width * 0.24,
-                                                      child:
-                                                          CircularProgressIndicator(
-                                                        value: event
-                                                                .cumulativeBytesLoaded /
-                                                            (event.expectedTotalBytes ??
-                                                                1),
-                                                        color: Theme.of(context)
-                                                            .primaryColor,
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ),
-                                      errorBuilder: (context, url, error) =>
-                                          Icon(
-                                        Icons.broken_image_outlined,
-                                        color: Colors.grey,
-                                        size: size.width * 0.24,
-                                      ),
-                                    ),
-                                  ),
-                                  Text(
-                                    widget.documentSnapshot['namaProduk'],
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                  Text(
-                                    'Rp. ${widget.documentSnapshot['harga']}',
-                                    style: const TextStyle(
-                                      fontSize: 22,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ],
-                              ),
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.all(20.0),
+                          width: double.infinity,
+                          height: 200,
+                          decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: const BorderRadius.only(
+                              topLeft: Radius.circular(30.0),
+                              topRight: Radius.circular(30.0),
                             ),
                           ),
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(18.0),
-                              width: double.infinity,
-                              height: 200,
-                              decoration: BoxDecoration(
-                                color: Colors.grey[300],
-                                borderRadius: const BorderRadius.only(
-                                  topLeft: Radius.circular(20.0),
-                                  topRight: Radius.circular(20.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text(
+                                'Spesifikasi',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w600,
+                                  fontFamily: 'FontPoppins',
+                                  fontSize: 15,
                                 ),
                               ),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  const Text(
-                                    'Spesifikasi',
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w600,
-                                      fontSize: 20,
-                                    ),
-                                  ),
-                                  Text(
-                                      'Resolusi foto maksimal : ${widget.documentSnapshot['resGbr']} p \n'
-                                      'Resolusi video maksimal : ${widget.documentSnapshot['resVid']} p \n'
-                                      'ISO maksimal : ${widget.documentSnapshot['maxISO']} \n'
-                                      'Baterai : ${widget.documentSnapshot['baterai']} mAh \n'
-                                      'Berat : ${widget.documentSnapshot['berat']} g \n'
-                                      // 'Sensor CMOS APS-C 24,1 megapiksel & DIGIC 4+ AF 9 titik dengan 1 titik AF tipe silang tengah \n'
-                                      // 'Mendukung Wi-Fi dan NFC',
-                                      ),
-                                ],
+                              SizedBox(
+                                height: 7,
                               ),
-                            ),
+                              Text(
+                                'Resolusi foto maksimal : ${widget.documentSnapshot['resGbr']} px \n'
+                                'Resolusi video maksimal : ${widget.documentSnapshot['resVid']} p \n'
+                                'ISO maksimal : ${widget.documentSnapshot['maxISO']} \n'
+                                'Baterai : ${widget.documentSnapshot['baterai']} mAh \n'
+                                'Berat : ${widget.documentSnapshot['berat']} g \n',
+                                // 'Sensor CMOS APS-C 24,1 megapiksel & DIGIC 4+ AF 9 titik dengan 1 titik AF tipe silang tengah \n'
+                                // 'Mendukung Wi-Fi dan NFC',
+                                style: TextStyle(
+                                    fontFamily: 'FontPoppins',
+                                    fontSize: 13,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ],
                           ),
-                        ],
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ],
-            );
-          },
+            ),
+          ],
         ),
       ),
-      backgroundColor: selectedIndex == 0 ? Colors.grey[200] : Colors.grey[200],
+      backgroundColor: selectedIndex == 0 ? Colors.white : Colors.white,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
@@ -279,11 +344,10 @@ class _DetailPageState extends State<DetailPage> {
           );
         },
         child: CircleAvatar(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xFF404040),
           radius: 24,
-          child: Image.asset(
-            "assets/icons/tumbup.png",
-            width: 20,
+          child: SvgPicture.asset(
+            "assets/icons/tombup.svg",
           ),
         ),
       ),

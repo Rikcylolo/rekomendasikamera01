@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.camera_market_app">
+    package="com.sistem_rekomendasi_kamera">
    <application
-        android:label="camera_market_app"
+        android:label="Rekomendasi Kamera"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

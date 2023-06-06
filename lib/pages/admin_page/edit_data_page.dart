@@ -62,7 +62,7 @@ class EditDataPage extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
                           Text(
-                            'Selamat datang, Admin <adminID>',
+                            'Selamat datang Admin',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontFamily: 'FontPoppins',

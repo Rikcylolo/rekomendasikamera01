@@ -79,7 +79,7 @@ class _ResultPageState extends State<ResultPage> {
         ),
       ),
       body: Container(
-        padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
+        padding: const EdgeInsets.fromLTRB(20, 10, 20, 0),
         alignment: Alignment.bottomCenter,
         decoration: BoxDecoration(
           color: Color(0xFFEAEAEA),
@@ -91,15 +91,16 @@ class _ResultPageState extends State<ResultPage> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.all(18.0),
+              padding: const EdgeInsets.all(0),
               child: Row(
                 children: [
                   const Expanded(
                     child: Text(
                       'Rating Terbaik',
                       style: TextStyle(
+                        fontFamily: 'FontPoppins',
                         fontWeight: FontWeight.w600,
-                        fontSize: 20,
+                        fontSize: 14,
                       ),
                     ),
                   ),
@@ -112,10 +113,11 @@ class _ResultPageState extends State<ResultPage> {
                         limit = value ? 5 : null;
                       });
                     },
-                  )
+                  ),
                 ],
               ),
             ),
+            SizedBox(height: 5),
             Flexible(
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

@@ -94,7 +94,7 @@ class _InsertPageState extends State<InsertPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       Text(
-                        'Selamat datang, Admin <adminID>',
+                        'Selamat datang Admin',
                         style: TextStyle(
                           fontFamily: 'FontPoppins',
                           fontWeight: FontWeight.w600,

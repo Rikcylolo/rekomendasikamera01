@@ -27,7 +27,6 @@ class _DeletePageState extends State<DeletePage> {
           ),
           onPressed: () => Navigator.pop(context),
         ),
-
         title: SizedBox(
           height: 50,
           width: 90,
@@ -37,7 +36,6 @@ class _DeletePageState extends State<DeletePage> {
           ),
         ),
       ),
-
       body: Container(
         padding: const EdgeInsets.all(18.0),
         alignment: Alignment.center,
@@ -64,15 +62,15 @@ class _DeletePageState extends State<DeletePage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: const [
                           Text(
-                            'Selamat datang, Admin <adminID>',
+                            'Selamat datang Admin',
                             style: TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 16,
                             ),
                           ),
-
-                          SizedBox(height: 8.0,),
-
+                          SizedBox(
+                            height: 8.0,
+                          ),
                           Text(
                             'Delete Page',
                             style: TextStyle(
@@ -84,9 +82,9 @@ class _DeletePageState extends State<DeletePage> {
                       ),
                     ],
                   ),
-
-                  const SizedBox(height: 18,),
-
+                  const SizedBox(
+                    height: 18,
+                  ),
                   Container(
                     padding: const EdgeInsets.all(12.0),
                     width: double.infinity,
@@ -104,9 +102,9 @@ class _DeletePageState extends State<DeletePage> {
                       textAlign: TextAlign.center,
                     ),
                   ),
-
-                  const SizedBox(height: 18,),
-
+                  const SizedBox(
+                    height: 18,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
@@ -120,7 +118,6 @@ class _DeletePageState extends State<DeletePage> {
                               fontSize: 16,
                             ),
                           ),
-
                           Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
@@ -134,15 +131,16 @@ class _DeletePageState extends State<DeletePage> {
                               controller: _idController,
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(horizontal: 18.0),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 18.0),
                               ),
                             ),
                           ),
                         ],
                       ),
-
-                      const SizedBox(width: 20,),
-
+                      const SizedBox(
+                        width: 20,
+                      ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -153,7 +151,6 @@ class _DeletePageState extends State<DeletePage> {
                               fontSize: 16,
                             ),
                           ),
-
                           Container(
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
@@ -167,7 +164,8 @@ class _DeletePageState extends State<DeletePage> {
                               controller: _nameProdukController,
                               decoration: const InputDecoration(
                                 border: InputBorder.none,
-                                contentPadding: EdgeInsets.symmetric(horizontal: 18.0),
+                                contentPadding:
+                                    EdgeInsets.symmetric(horizontal: 18.0),
                               ),
                             ),
                           ),
@@ -177,9 +175,7 @@ class _DeletePageState extends State<DeletePage> {
                   ),
                 ],
               ),
-
               const SizedBox(height: 360),
-
               InkWell(
                 onTap: () {
                   ScaffoldMessenger.of(context).showSnackBar(
@@ -195,8 +191,7 @@ class _DeletePageState extends State<DeletePage> {
                   alignment: Alignment.center,
                   decoration: const BoxDecoration(
                       color: Colors.black,
-                      borderRadius: BorderRadius.all(Radius.circular(30))
-                  ),
+                      borderRadius: BorderRadius.all(Radius.circular(30))),
                   child: const Text(
                     'Hapus',
                     style: TextStyle(
@@ -207,13 +202,13 @@ class _DeletePageState extends State<DeletePage> {
                   ),
                 ),
               ),
-
-              const SizedBox(height: 18,),
+              const SizedBox(
+                height: 18,
+              ),
             ],
           ),
         ),
       ),
-
     );
   }
 }

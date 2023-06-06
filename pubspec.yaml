@@ -22,6 +22,8 @@ dependencies:
   firebase_storage: ^11.1.2
   shared_preferences: ^2.1.1
   animated_bottom_navigation_bar: ^1.2.0
+  
+  change_app_package_name: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -38,6 +40,7 @@ flutter:
       - asset: assets/fonts/Poppins-Regular.ttf
       - asset: assets/fonts/Poppins-Medium.ttf
       - asset: assets/fonts/Poppins-SemiBold.ttf
+      - asset: assets/fonts/Poppins-Bold.ttf
   assets:
     - assets/icons/
     - assets/images/

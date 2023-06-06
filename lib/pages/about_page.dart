@@ -148,7 +148,7 @@ class _AboutPageState extends State<AboutPage> {
                                       scale:
                                           1.0, // Faktor skala untuk perbesaran tambahan (opsional)
                                       child: Image.asset(
-                                        'assets/images/lamser.jpg',
+                                        'assets/images/Lamser.jpg',
                                       ),
                                     ),
                                   ),

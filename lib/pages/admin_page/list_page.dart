@@ -101,7 +101,7 @@ class _DataListPageState extends State<DataListPage> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content:
-                                Text('Anda telah berhasil menghapus buku.'),
+                                Text('Anda telah berhasil menghapus data.'),
                             duration: Duration(milliseconds: 500),
                           ),
                         );
@@ -193,7 +193,7 @@ class _DataListPageState extends State<DataListPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: const [
                       Text(
-                        'Selamat datang, Admin <adminID>',
+                        'Selamat datang Admin',
                         style: TextStyle(
                           fontWeight: FontWeight.w600,
                           fontFamily: 'FontPoppins',

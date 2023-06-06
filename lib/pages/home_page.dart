@@ -129,7 +129,7 @@ class HomeContainer extends StatelessWidget {
     return InkWell(
       onTap: () => tujuan(),
       child: Container(
-        margin: const EdgeInsets.all(15),
+        margin: const EdgeInsets.all(10),
         height: 207,
         width: 151,
         decoration: BoxDecoration(

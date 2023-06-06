@@ -55,33 +55,34 @@ class CameraItem extends StatelessWidget {
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyText1?.copyWith(
                         fontSize: 10,
-                        color: Color(0xFF262626),
+                        color: const Color(0xFF262626),
                         fontFamily: 'FontPoppins',
                         fontWeight: FontWeight.w600,
                       ),
                 ),
               ),
             Align(
+              alignment: Alignment.topCenter,
+              child: Container(
+                margin: const EdgeInsets.only(top: 30),
                 alignment: Alignment.topCenter,
-                child: Container(
-                  margin: EdgeInsets.only(top: 30),
-                  alignment: Alignment.topCenter,
-                  child: Image.asset(
-                    "assets/images/background_image.png",
-                    fit: BoxFit.fill,
-                    width: 125,
-                  ),
-                )),
+                child: Image.asset(
+                  "assets/images/background_image.png",
+                  fit: BoxFit.fill,
+                  width: 115,
+                ),
+              ),
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 0),
+                const SizedBox(height: 0),
                 Align(
                   alignment: Alignment.center,
                   child: Container(
-                    width: 110,
-                    height: 110,
-                    margin: EdgeInsets.fromLTRB(0, 30, 0, 15),
+                    width: 100,
+                    height: 100,
+                    margin: const EdgeInsets.fromLTRB(0, 30, 0, 12),
                     child: Image.network(
                       documentSnapshot['gambar'],
                       width: size.width * 0.24,
@@ -102,38 +103,86 @@ class CameraItem extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                const SizedBox(height: 20.0),
                 Padding(
-                  padding: EdgeInsets.only(left: 8),
-                  child: Text(
-                    documentSnapshot['namaProduk'],
-                    textAlign: TextAlign.left,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                          fontSize: 10,
-                          color: Color(0xFF262626),
-                          fontFamily: 'FontPoppins',
-                          fontWeight: FontWeight.w400,
-                        ),
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text(
+                      (documentSnapshot['namaProduk'].length <= 22)
+                          ? documentSnapshot['namaProduk']
+                          : documentSnapshot['namaProduk'].substring(0, 20),
+                      textAlign: TextAlign.left,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: Theme.of(context).textTheme.bodyText1?.copyWith(
+                            fontSize: 12,
+                            color: const Color(0xFF262626),
+                            fontFamily: 'FontPoppins',
+                            fontWeight: FontWeight.w400,
+                          ),
+                    ),
                   ),
                 ),
-                SizedBox(height: 4.0),
+                const SizedBox(height: 4.0),
                 Padding(
-                  padding: EdgeInsets.only(left: 8.0),
-                  child: Text(
-                    "Rp${NumberFormat("#,##0", "en_US").format(documentSnapshot['harga'])}",
-                    textAlign: TextAlign.left,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: Theme.of(context).textTheme.bodyText1?.copyWith(
-                          fontSize: 10,
-                          color: Color(0xFF262626),
-                          fontFamily: 'FontPoppins',
-                          fontWeight: FontWeight.w600,
-                        ),
+                  padding: const EdgeInsets.only(left: 8.0, bottom: 8.0),
+                  child: Align(
+                    alignment: Alignment.bottomLeft,
+                    child: Text.rich(
+                      TextSpan(
+                        children: [
+                          TextSpan(
+                            text: "Rp",
+                            style: TextStyle(
+                              fontSize: 10,
+                              color: Color(0xFF262626),
+                              fontFamily: 'FontPoppins',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          TextSpan(
+                            text: NumberFormat("#,##0", "en_US")
+                                .format(documentSnapshot['harga'])
+                                .replaceAll(",", ".")
+                                .substring(
+                                    0,
+                                    NumberFormat("#,##0", "en_US")
+                                            .format(documentSnapshot['harga'])
+                                            .replaceAll(",", ".")
+                                            .length -
+                                        3),
+                            style: const TextStyle(
+                              fontSize: 14,
+                              color: Color(0xFF262626),
+                              fontFamily: 'FontPoppins',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          TextSpan(
+                            text: NumberFormat("#,##0", "en_US")
+                                .format(documentSnapshot['harga'])
+                                .replaceAll(",", ".")
+                                .substring(NumberFormat("#,##0", "en_US")
+                                        .format(documentSnapshot['harga'])
+                                        .replaceAll(",", ".")
+                                        .length -
+                                    3),
+                            style: const TextStyle(
+                              fontSize: 10,
+                              color: Color(0xFF262626),
+                              fontFamily: 'FontPoppins',
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ],
+                      ),
+                      textAlign: TextAlign.left,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                )
+                ),
               ],
             ),
           ],

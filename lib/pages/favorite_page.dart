@@ -98,7 +98,13 @@ class _FavoritePageState extends State<FavoritePage> {
               )
             : cameraList.isEmpty
                 ? const Center(
-                    child: Text("Favorite is empty"),
+                    child: Text(
+                      "Favorite is empty",
+                      style: TextStyle(
+                          fontFamily: 'FontPoppins',
+                          fontSize: 14,
+                          fontWeight: FontWeight.w400),
+                    ),
                   )
                 : GridView.builder(
                     gridDelegate:

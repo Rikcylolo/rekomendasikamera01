@@ -1,6 +1,7 @@
 import 'package:camera_market_app/pages/home_page.dart';
 import 'package:camera_market_app/pages/main_page.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -25,43 +26,45 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black38,
+      backgroundColor: Color(0xFF1F1F1F),
       body: Stack(
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Image.asset(
-                    'assets/images/fotografi_splash.png',
-                    width: 360,
+                    'assets/images/Fotografi_splash.png',
+                    width: 370,
                   ),
                 ],
               ),
             ],
           ),
           Positioned(
-            top: 100.0,
+            top: 130.0,
             bottom: 0.0,
             left: 0.0,
             right: 0.0,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Image.asset(
-                  'assets/icons/Logo.png',
+                SvgPicture.asset(
+                  'assets/icons/logo.svg',
                   color: Colors.white,
+                  width: 167.72,
                 ),
                 const SizedBox(
-                  height: 18,
+                  height: 30,
                 ),
                 const Text(
                   'Temukan Kamera\nterbaik kamu',
                   style: TextStyle(
-                    fontWeight: FontWeight.normal,
-                    color: Colors.white,
+                    fontFamily: 'FontPoppins',
+                    fontWeight: FontWeight.w400,
+                    color: Color(0xFFBCBCBC),
                     fontSize: 20,
                   ),
                   textAlign: TextAlign.center,

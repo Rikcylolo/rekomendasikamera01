@@ -1,4 +1,4 @@
-package com.example.camera_market_app
+package com.sistem_rekomendasi_kamera
 
 import io.flutter.embedding.android.FlutterActivity
 
