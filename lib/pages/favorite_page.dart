@@ -99,7 +99,7 @@ class _FavoritePageState extends State<FavoritePage> {
             : cameraList.isEmpty
                 ? const Center(
                     child: Text(
-                      "Favorite is empty",
+                      "List favorit kamu tidak ada",
                       style: TextStyle(
                           fontFamily: 'FontPoppins',
                           fontSize: 14,

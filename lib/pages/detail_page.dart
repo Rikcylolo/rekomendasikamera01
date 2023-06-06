@@ -265,7 +265,7 @@ class _DetailPageState extends State<DetailPage> {
                                         fontSize: 14,
                                         color: Color(0xFF262626),
                                         fontFamily: 'FontPoppins',
-                                        fontWeight: FontWeight.w700,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ],
