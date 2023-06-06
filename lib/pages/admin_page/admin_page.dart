@@ -1,4 +1,5 @@
 import 'package:camera_market_app/pages/admin_page/edit_data_page.dart';
+import 'package:camera_market_app/pages/home_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -54,7 +55,14 @@ class _AdminPageState extends State<AdminPage> {
               'assets/icons/backarrow.svg',
               color: Color(0xFF262626),
             ),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (BuildContext context) => HomePage(),
+                ),
+              );
+            },
           ),
         ),
         title: Padding(

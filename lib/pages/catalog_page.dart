@@ -325,7 +325,6 @@ class _CatalogPageState extends State<CatalogPage> {
           radius: 24,
           child: SvgPicture.asset(
             "assets/icons/tombup.svg",
-            width: 25,
           ),
         ),
       ),

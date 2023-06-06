@@ -152,9 +152,8 @@ class _ResultPageState extends State<ResultPage> {
         child: CircleAvatar(
           backgroundColor: Colors.black,
           radius: 24,
-          child: Image.asset(
-            "assets/icons/tumbup.png",
-            width: 20,
+          child: SvgPicture.asset(
+            "assets/icons/tombup.svg",
           ),
         ),
       ),

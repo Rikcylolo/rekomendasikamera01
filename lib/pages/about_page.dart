@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 
 import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
@@ -48,8 +50,6 @@ class _AboutPageState extends State<AboutPage> {
         title: Padding(
           padding: EdgeInsets.only(top: 0),
           child: SizedBox(
-            height: 30,
-            width: 124.09,
             child: SvgPicture.asset(
               'assets/icons/logo.svg',
             ),
@@ -65,20 +65,21 @@ class _AboutPageState extends State<AboutPage> {
                 height: 659 - 16,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
-                  color: Colors.grey[400],
+                  color: Color(0xFFEAEAEA),
                   borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(20.0),
-                    topRight: Radius.circular(20.0),
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
                   ),
                 ),
                 child: Container(
                   alignment: Alignment.topLeft,
-                  margin: const EdgeInsets.all(18.0),
+                  margin: const EdgeInsets.all(20.0),
                   child: const Text(
                     'Tentang Aplikasi',
                     style: TextStyle(
+                      fontFamily: 'FontPoppins',
                       fontWeight: FontWeight.w600,
-                      fontSize: 20,
+                      fontSize: 14,
                     ),
                   ),
                 ),
@@ -89,12 +90,12 @@ class _AboutPageState extends State<AboutPage> {
                 top: 60.0,
                 bottom: 0.0,
                 child: Container(
-                  padding: const EdgeInsets.all(18.0),
-                  width: double.infinity, // mengisi seluruh lebar layar
-                  height: 200.0, // tinggi container kedua
-                  decoration: BoxDecoration(
-                    color: Colors.grey[200],
-                    borderRadius: const BorderRadius.only(
+                  padding: const EdgeInsets.all(20.0),
+                  width: double.infinity,
+                  height: 200.0,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(20.0),
                       topRight: Radius.circular(20.0),
                     ),
@@ -103,53 +104,237 @@ class _AboutPageState extends State<AboutPage> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      Column(
                         children: [
-                          Container(
-                            width: 100,
-                            height: 130,
-                            decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(10)),
+                          SizedBox(
+                            child: Container(
+                              margin: const EdgeInsets.only(bottom: 15),
+                              alignment: Alignment.topLeft,
+                              child: const Text(
+                                'Pengembang Aplikasi',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontFamily: 'FontPoppins',
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
                           ),
-                          Container(
-                            width: 100,
-                            height: 130,
-                            decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(10)),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                width: 104,
+                                height: 143,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black
+                                          .withOpacity(0.3), // Warna bayangan
+                                      blurRadius: 5, // Ukuran blur bayangan
+                                      offset: Offset(
+                                          0, 0), // Posisi bayangan (x, y)
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: FractionallySizedBox(
+                                    widthFactor:
+                                        1.5, // Faktor skala berdasarkan lebar kontainer
+                                    child: Transform.scale(
+                                      scale:
+                                          1.0, // Faktor skala untuk perbesaran tambahan (opsional)
+                                      child: Image.asset(
+                                        'assets/images/lamser.jpg',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 104,
+                                height: 143,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black
+                                          .withOpacity(0.3), // Warna bayangan
+                                      blurRadius: 5, // Ukuran blur bayangan
+                                      offset: Offset(
+                                          0, 0), // Posisi bayangan (x, y)
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: FractionallySizedBox(
+                                    widthFactor:
+                                        1.5, // Faktor skala berdasarkan lebar kontainer
+                                    child: Transform.scale(
+                                      scale:
+                                          1.0, // Faktor skala untuk perbesaran tambahan (opsional)
+                                      child: Image.asset(
+                                        'assets/images/rikcy.jpg',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                              Container(
+                                width: 104,
+                                height: 143,
+                                decoration: BoxDecoration(
+                                  color: Colors.grey,
+                                  borderRadius: BorderRadius.circular(20),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black
+                                          .withOpacity(0.3), // Warna bayangan
+                                      blurRadius: 5, // Ukuran blur bayangan
+                                      offset: Offset(
+                                          0, 0), // Posisi bayangan (x, y)
+                                    ),
+                                  ],
+                                ),
+                                child: ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: FractionallySizedBox(
+                                    widthFactor:
+                                        1.5, // Faktor skala berdasarkan lebar kontainer
+                                    child: Transform.scale(
+                                      scale:
+                                          1.0, // Faktor skala untuk perbesaran tambahan (opsional)
+                                      child: Image.asset(
+                                        'assets/images/rido.jpg',
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                          Container(
-                            width: 100,
-                            height: 130,
-                            decoration: BoxDecoration(
-                                color: Colors.grey,
-                                borderRadius: BorderRadius.circular(10)),
-                          ),
+                          const SizedBox(
+                              height: 6), // Spacer antara kontainer dan teks
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Container(
+                                width: 104,
+                                child: const Text(
+                                  "Lamser",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: 'FontPoppins',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                              Container(
+                                width: 100,
+                                child: const Text(
+                                  "Rikcy",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: 'FontPoppins',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                              Container(
+                                width: 100,
+                                child: const Text(
+                                  "Rido",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      fontFamily: 'FontPoppins',
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w400),
+                                ),
+                              ),
+                            ],
+                          )
                         ],
                       ),
-                      const SizedBox(
-                        height: 20,
-                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 0.0,
+                right: 0.0,
+                top: 300,
+                bottom: 0.0,
+                child: Container(
+                  padding: const EdgeInsets.all(20.0),
+                  width: double.infinity,
+                  height: 100.0,
+                  decoration: const BoxDecoration(
+                    color: Color(0xFFEAEAEA),
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(20.0),
+                      topRight: Radius.circular(20.0),
+                    ),
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       const Text(
-                        "Informasi",
-                        style: TextStyle(fontWeight: FontWeight.bold),
+                        'Informasi',
+                        style: TextStyle(
+                            fontFamily: 'FontPoppins',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w700),
                       ),
                       const SizedBox(
-                        height: 20,
+                          height:
+                              7), // Spacer untuk memberikan jarak antara teks pertama dan kedua
+                      RichText(
+                        text: const TextSpan(
+                          style: TextStyle(
+                            height: 1.35,
+                            fontFamily: 'FontPoppins',
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
+                          children: <TextSpan>[
+                            TextSpan(
+                              text:
+                                  'Aplikasi Sistem Rekomendasi Kamera ini dibuat menggunakan metode ',
+                            ),
+                            TextSpan(
+                              text:
+                                  'Weighted Aggregated Sum Product Assessment ',
+                              style: TextStyle(
+                                  fontStyle: FontStyle.italic,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            TextSpan(
+                              text: '(WASPAS) ',
+                              style: TextStyle(fontWeight: FontWeight.w500),
+                            ),
+                            TextSpan(
+                              text:
+                                  'untuk mendapatkan rekomendasi kamera terbaik sesuai dengan kebutuhan pengguna. \n\nDengan memasukkan bobot terhadap spesifikasi kamera yang dibutuhkan, sistem dapat merekomendasikan kamera yang paling sesuai dengan kebutuhan pengguna. \n\nPengguna memasukkan data kebutuhan pada diagram likert yang memiliki nilai antara satu (1) sampai lima (5).',
+                            ),
+                          ],
+                        ),
                       ),
-                      const Text(
-                          "Aplikasi Sistem Rekomendasi Kamera ini dibuat menggunakan metode Weighted Aggregated Sum Product Assessment (WASPAS) untuk mendapatkan rekomendasi kamera terbaik sesuai dengan kebutuhan pengguna. Dengan memasukkan bobot terhadap spesifikasi kamera yang dibutuhkan, sistem dapat merekomendasikan kamera yang paling sesuai dengan kebutuhan pengguna. Pengguna memasukkan data kebutuhan pada diagram likert yang memiliki nilai antara satu (1) sampai lima (5)."),
                     ],
                   ),
                 ),
               ),
             ],
-          )
+          ),
         ],
       ),
-      backgroundColor: selectedIndex == 0 ? Colors.grey[200] : Colors.grey[200],
+      backgroundColor: Colors.white,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.white,
@@ -160,11 +345,10 @@ class _AboutPageState extends State<AboutPage> {
           );
         },
         child: CircleAvatar(
-          backgroundColor: Colors.black,
+          backgroundColor: Color(0xFF404040),
           radius: 24,
-          child: Image.asset(
-            "assets/icons/tumbup.png",
-            width: 20,
+          child: SvgPicture.asset(
+            "assets/icons/tombup.svg",
           ),
         ),
       ),
