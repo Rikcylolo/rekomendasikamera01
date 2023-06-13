@@ -218,7 +218,7 @@ class _DetailPageState extends State<DetailPage> {
                               Text.rich(
                                 TextSpan(
                                   children: [
-                                    TextSpan(
+                                    const TextSpan(
                                       text: "Rp",
                                       style: TextStyle(
                                         fontSize: 14,
@@ -245,7 +245,7 @@ class _DetailPageState extends State<DetailPage> {
                                         fontSize: 17,
                                         color: Color(0xFF262626),
                                         fontFamily: 'FontPoppins',
-                                        fontWeight: FontWeight.w700,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                     TextSpan(

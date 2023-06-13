@@ -773,7 +773,8 @@ class _UpdatePageState extends State<UpdatePage> {
                       await camera.doc(widget.documentSnapshot.id).set({
                         "namaProduk": _productNameController.text,
                         "gambar": getImageUrl ?? _imageUrl,
-                        "resGbr": int.parse(_maxImageResolutionController.text),
+                        "resGbr":
+                            double.parse(_maxImageResolutionController.text),
                         "resVid": int.parse(_maxVideoResolutionController.text),
                         "maxISO": int.parse(_isoMaxController.text),
                         "baterai": int.parse(_batteryController.text),

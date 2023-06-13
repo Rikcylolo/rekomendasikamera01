@@ -19,8 +19,8 @@ class _RecommendationPageState extends State<RecommendationPage> {
   int _resolusiVideoValue = 1;
   int _isoValue = 1;
   int _bateraiValue = 1;
-  int _beratValue = 1;
-  int _hargaValue = 1;
+  int _beratValue = 5;
+  int _hargaValue = 5;
 
   late Stream<QuerySnapshot<Map<String, dynamic>>> camera;
 
@@ -79,9 +79,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                 Container(
                   height: 800 - 101,
                   alignment: Alignment.center,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color(0xFFEAEAEA),
-                    borderRadius: const BorderRadius.only(
+                    borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(30.0),
                       topRight: Radius.circular(30.0),
                     ),
@@ -101,7 +101,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                             fontSize: 14,
                           ),
                         ),
-                        const SizedBox(
+                        SizedBox(
                           height: 5,
                         ),
                         Text(
@@ -126,9 +126,9 @@ class _RecommendationPageState extends State<RecommendationPage> {
                     // mengisi seluruh lebar layar
                     height: 200.0,
                     // tinggi container kedua
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       color: Colors.white,
-                      borderRadius: const BorderRadius.only(
+                      borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(30.0),
                         topRight: Radius.circular(30.0),
                       ),
@@ -143,10 +143,10 @@ class _RecommendationPageState extends State<RecommendationPage> {
                             child: Container(
                               padding:
                                   const EdgeInsets.fromLTRB(13, 10, 19, 11),
-                              decoration: BoxDecoration(
+                              decoration: const BoxDecoration(
                                 color: Color(0xFFEAEAEA),
                                 borderRadius:
-                                    const BorderRadius.all(Radius.circular(30)),
+                                    BorderRadius.all(Radius.circular(30)),
                               ), //
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -255,10 +255,10 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                   child: Container(
                                     padding: const EdgeInsets.fromLTRB(
                                         13, 10, 13, 11),
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Color(0xFFEAEAEA),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(30)),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(30)),
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
@@ -464,10 +464,10 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                   child: Container(
                                     padding: const EdgeInsets.fromLTRB(
                                         13, 10, 13, 11),
-                                    decoration: BoxDecoration(
+                                    decoration: const BoxDecoration(
                                       color: Color(0xFFEAEAEA),
-                                      borderRadius: const BorderRadius.all(
-                                          Radius.circular(30)),
+                                      borderRadius:
+                                          BorderRadius.all(Radius.circular(30)),
                                     ),
                                     child: Column(
                                       crossAxisAlignment:
@@ -1100,7 +1100,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                           children: [
                                             const Expanded(
                                               child: Text(
-                                                'Tidak\nPenting',
+                                                'Paling\nRingan',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontFamily: 'FontPoppins',
@@ -1113,7 +1113,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                               child: Column(
                                                 children: [
                                                   Radio(
-                                                    value: 1,
+                                                    value: 5,
                                                     activeColor: Colors.black,
                                                     groupValue: _beratValue,
                                                     onChanged: (int? value) {
@@ -1138,7 +1138,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                               child: Column(
                                                 children: [
                                                   Radio(
-                                                    value: 2,
+                                                    value: 4,
                                                     activeColor: Colors.black,
                                                     groupValue: _beratValue,
                                                     onChanged: (int? value) {
@@ -1188,7 +1188,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                               child: Column(
                                                 children: [
                                                   Radio(
-                                                    value: 4,
+                                                    value: 2,
                                                     activeColor: Colors.black,
                                                     groupValue: _beratValue,
                                                     onChanged: (int? value) {
@@ -1213,7 +1213,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                               child: Column(
                                                 children: [
                                                   Radio(
-                                                    value: 5,
+                                                    value: 1,
                                                     activeColor: Colors.black,
                                                     groupValue: _beratValue,
                                                     onChanged: (int? value) {
@@ -1236,7 +1236,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                             ),
                                             const Expanded(
                                               child: Text(
-                                                'Sangat\nPenting',
+                                                'Paling\nBerat',
                                                 textAlign: TextAlign.center,
                                                 style: TextStyle(
                                                   fontFamily: 'FontPoppins',
@@ -1311,7 +1311,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                               child: Column(
                                                 children: [
                                                   Radio(
-                                                    value: 1,
+                                                    value: 5,
                                                     activeColor: Colors.black,
                                                     groupValue: _hargaValue,
                                                     onChanged: (int? value) {
@@ -1336,7 +1336,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                               child: Column(
                                                 children: [
                                                   Radio(
-                                                    value: 2,
+                                                    value: 4,
                                                     activeColor: Colors.black,
                                                     groupValue: _hargaValue,
                                                     onChanged: (int? value) {
@@ -1386,7 +1386,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                               child: Column(
                                                 children: [
                                                   Radio(
-                                                    value: 4,
+                                                    value: 2,
                                                     activeColor: Colors.black,
                                                     groupValue: _hargaValue,
                                                     onChanged: (int? value) {
@@ -1411,7 +1411,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                               child: Column(
                                                 children: [
                                                   Radio(
-                                                    value: 5,
+                                                    value: 1,
                                                     activeColor: Colors.black,
                                                     groupValue: _hargaValue,
                                                     onChanged: (int? value) {
@@ -1502,7 +1502,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
                                               _resolusiFotoValue,
                                               _resolusiVideoValue,
                                               _isoValue,
-                                              _beratValue,
+                                              _bateraiValue,
                                               _beratValue,
                                               _hargaValue,
                                             ),
@@ -1650,6 +1650,7 @@ class _RecommendationPageState extends State<RecommendationPage> {
   // }
 
   List<List> rekomendasi(
+    //Bobot Kriteria
     List<QueryDocumentSnapshot<Map<String, dynamic>>> documentSnapshot,
     int resolusiFoto,
     int resolusiVideo,
@@ -1685,8 +1686,8 @@ class _RecommendationPageState extends State<RecommendationPage> {
     List<double> listC2 = []; // max_video_resolution
     List<double> listC3 = []; // iso_max
     List<double> listC4 = []; // battery
-    List<double> listC5 = []; // price
-    List<double> listC6 = []; // weight
+    List<double> listC5 = []; // berat
+    List<double> listC6 = []; // harga
 
     for (int i = 0; i < documentSnapshot.length; i++) {
       dataFromDatabase.add(documentSnapshot[i]);
@@ -1696,8 +1697,8 @@ class _RecommendationPageState extends State<RecommendationPage> {
       listC2.add(documentSnapshot[i]['resVid'].toDouble());
       listC3.add(documentSnapshot[i]['maxISO'].toDouble());
       listC4.add(documentSnapshot[i]['baterai'].toDouble());
-      listC5.add(documentSnapshot[i]['harga'].toDouble());
-      listC6.add(documentSnapshot[i]['berat'].toDouble());
+      listC5.add(documentSnapshot[i]['berat'].toDouble());
+      listC6.add(documentSnapshot[i]['harga'].toDouble());
     }
 
     double maxC1 = maxC(listC1);

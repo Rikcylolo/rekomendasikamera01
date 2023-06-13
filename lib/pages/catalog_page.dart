@@ -21,6 +21,8 @@ class _CatalogPageState extends State<CatalogPage> {
   final cameraCollection = FirebaseFirestore.instance.collection('camera');
   final TextEditingController searchInputController = TextEditingController();
 
+  List<String> searchResults = [];
+
   int selectedIndex = 1;
 
   final List<IconData> icons = [
@@ -139,7 +141,7 @@ class _CatalogPageState extends State<CatalogPage> {
                 filled: true,
                 fillColor: Colors.white,
                 hintText: "Cari kamera",
-                hintStyle: TextStyle(
+                hintStyle: const TextStyle(
                     fontFamily: 'FontPoppins',
                     fontWeight: FontWeight.w500,
                     fontSize: 15,
@@ -174,16 +176,20 @@ class _CatalogPageState extends State<CatalogPage> {
             const SizedBox(
               height: 10.0,
             ),
-            Container(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                'Pilih Merek',
-                style: TextStyle(
-                  fontFamily: 'FontPoppins',
-                  fontWeight: FontWeight.w600,
-                  fontSize: 14,
+            Column(
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: const Text(
+                    'Pilih Merek ',
+                    style: TextStyle(
+                      fontFamily: 'FontPoppins',
+                      fontWeight: FontWeight.w600,
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
             SizedBox(
               width: size.width,
@@ -275,16 +281,34 @@ class _CatalogPageState extends State<CatalogPage> {
             const SizedBox(
               height: 10,
             ),
-            Container(
-              alignment: Alignment.topLeft,
-              child: const Text(
-                'Produk Kamera',
-                style: TextStyle(
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'FontPoppins',
-                  fontSize: 14,
+            Row(
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: const Text(
+                    'Produk Kamera',
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontFamily: 'FontPoppins',
+                      fontSize: 14,
+                    ),
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    alignment: Alignment.topRight,
+                    child: Text(
+                      'Jumlah Data : ${cameraList.length}',
+                      textAlign: TextAlign.right,
+                      style: const TextStyle(
+                        fontFamily: 'FontPoppins',
+                        fontWeight: FontWeight.w500,
+                        fontSize: 12,
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(
               height: 5,

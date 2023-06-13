@@ -393,7 +393,7 @@ class _InsertPageState extends State<InsertPage> {
                             height: 45,
                             child: TextField(
                               keyboardType: TextInputType.number,
-                              style: TextStyle(
+                              style: const TextStyle(
                                 color: Color(0xFF262626),
                                 fontFamily: 'FontPoppins',
                                 fontWeight: FontWeight.w500,
@@ -759,7 +759,7 @@ class _InsertPageState extends State<InsertPage> {
                           "namaProduk": _productNameController.text,
                           "gambar": imageUrl,
                           "resGbr":
-                              int.parse(_maxImageResolutionController.text),
+                              double.parse(_maxImageResolutionController.text),
                           "resVid":
                               int.parse(_maxVideoResolutionController.text),
                           "maxISO": int.parse(_isoMaxController.text),
