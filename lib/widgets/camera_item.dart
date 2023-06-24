@@ -111,9 +111,9 @@ class CameraItem extends StatelessWidget {
                     child: Text(
                       (documentSnapshot['namaProduk'].length <= 22)
                           ? documentSnapshot['namaProduk']
-                          : documentSnapshot['namaProduk'].substring(0, 20),
+                          : documentSnapshot['namaProduk'],
                       textAlign: TextAlign.left,
-                      maxLines: 2,
+                      maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: Theme.of(context).textTheme.bodyText1?.copyWith(
                             fontSize: 12,

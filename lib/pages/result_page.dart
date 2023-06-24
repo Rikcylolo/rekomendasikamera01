@@ -11,7 +11,8 @@ import 'package:camera_market_app/pages/catalog_page.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class ResultPage extends StatefulWidget {
-  const ResultPage({super.key, required this.waspasTempResult});
+  const ResultPage({Key? key, required this.waspasTempResult})
+      : super(key: key);
   static const routeName = '/resultPageRoute';
 
   final List<List> waspasTempResult;
@@ -22,8 +23,8 @@ class ResultPage extends StatefulWidget {
 
 class _ResultPageState extends State<ResultPage> {
   List<List> waspasResult = [];
-  int? limit;
-  bool switchTop5 = false;
+  bool switchTop5 = true;
+  int limit = 5;
 
   int selectedIndex = 2;
 
@@ -36,13 +37,12 @@ class _ResultPageState extends State<ResultPage> {
 
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((timeStamp) {
       setState(() {
         waspasResult = widget.waspasTempResult;
       });
     });
-
-    super.initState();
   }
 
   @override
@@ -110,7 +110,7 @@ class _ResultPageState extends State<ResultPage> {
                     onChanged: (value) {
                       setState(() {
                         switchTop5 = value;
-                        limit = value ? 5 : null;
+                        limit = value ? 5 : waspasResult.length;
                       });
                     },
                   ),
@@ -122,15 +122,10 @@ class _ResultPageState extends State<ResultPage> {
               child: GridView.builder(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, childAspectRatio: 0.72),
-                itemCount: limit != null
-                    ? waspasResult.length < limit!
-                        ? waspasResult.length
-                        : limit!
-                    : waspasResult.length,
+                itemCount: limit,
                 itemBuilder: (context, index) {
                   final QueryDocumentSnapshot<Map<String, dynamic>>
                       documentSnapshot = waspasResult[index][2][0];
-                  // print(documentSnapshot.data());
                   return CameraItem(
                     documentSnapshot: documentSnapshot,
                     q: waspasResult[index][1],
@@ -170,7 +165,7 @@ class _ResultPageState extends State<ResultPage> {
         rightCornerRadius: 24,
         notchSmoothness: NotchSmoothness.sharpEdge,
         notchMargin: 0,
-        shadow: const Shadow(
+        shadow: const BoxShadow(
           color: Colors.grey,
           offset: Offset(0, 1),
           blurRadius: 10,

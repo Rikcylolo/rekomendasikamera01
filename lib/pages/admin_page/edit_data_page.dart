@@ -1,5 +1,7 @@
+import 'package:camera_market_app/pages/admin_page/admin_page.dart';
 import 'package:camera_market_app/pages/admin_page/insert_page.dart';
 import 'package:camera_market_app/pages/admin_page/list_page.dart';
+import 'package:camera_market_app/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -22,7 +24,8 @@ class EditDataPage extends StatelessWidget {
               'assets/icons/backarrow.svg',
               color: Color(0xFF262626),
             ),
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => Navigator.pushNamedAndRemoveUntil(
+                context, AdminPage.routeName, (route) => false),
           ),
         ),
         title: Padding(
