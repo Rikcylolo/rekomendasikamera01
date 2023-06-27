@@ -132,206 +132,200 @@ class _DetailPageState extends State<DetailPage> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            Stack(
-              children: [
-                Container(
-                  height: 660,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    color: Color(0xFFEAEAEA),
-                    borderRadius: const BorderRadius.only(
-                      topLeft: Radius.circular(30.0),
-                      topRight: Radius.circular(30.0),
-                    ),
+      body: Column(
+        children: [
+          Stack(
+            children: [
+              Container(
+                height: 660 - 17,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  color: Color(0xFFEAEAEA),
+                  borderRadius: const BorderRadius.only(
+                    topLeft: Radius.circular(30.0),
+                    topRight: Radius.circular(30.0),
                   ),
                 ),
-                Positioned(
-                  top: 20.0,
-                  bottom: 0.0,
-                  left: 0.0,
-                  right: 0.0,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          height: 360,
-                          alignment: Alignment.center,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFFEAEAEA),
-                            borderRadius: BorderRadius.only(
-                              topLeft: Radius.circular(30.0),
-                              topRight: Radius.circular(30.0),
-                            ),
+              ),
+              Positioned(
+                top: 20.0,
+                bottom: 0.0,
+                left: 0.0,
+                right: 0.0,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Expanded(
+                      flex: 1,
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        height: 360,
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          color: Color(0xFFEAEAEA),
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30.0),
+                            topRight: Radius.circular(30.0),
                           ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Expanded(
-                                flex: 6,
-                                child: Transform.scale(
-                                  scale: 0.8,
-                                  child: Image.network(
-                                    widget.documentSnapshot['gambar'],
-                                    loadingBuilder: (context, child, event) {
-                                      if (event == null) {
-                                        return child;
-                                      } else {
-                                        return SizedBox(
-                                          width: size.width * 0.24,
-                                          height: size.width * 0.24,
-                                          child: Center(
-                                            child: CircularProgressIndicator(
-                                              value: event
-                                                      .cumulativeBytesLoaded /
-                                                  (event.expectedTotalBytes ??
-                                                      1),
-                                              color: Theme.of(context)
-                                                  .primaryColor,
-                                            ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Expanded(
+                              flex: 6,
+                              child: Transform.scale(
+                                scale: 0.8,
+                                child: Image.network(
+                                  widget.documentSnapshot['gambar'],
+                                  loadingBuilder: (context, child, event) {
+                                    if (event == null) {
+                                      return child;
+                                    } else {
+                                      return SizedBox(
+                                        width: size.width * 0.24,
+                                        height: size.width * 0.24,
+                                        child: Center(
+                                          child: CircularProgressIndicator(
+                                            value: event.cumulativeBytesLoaded /
+                                                (event.expectedTotalBytes ?? 1),
+                                            color:
+                                                Theme.of(context).primaryColor,
                                           ),
-                                        );
-                                      }
-                                    },
-                                    errorBuilder: (context, url, error) => Icon(
-                                      Icons.broken_image_outlined,
-                                      color: Colors.grey,
-                                      size: size.width * 0.24,
-                                    ),
+                                        ),
+                                      );
+                                    }
+                                  },
+                                  errorBuilder: (context, url, error) => Icon(
+                                    Icons.broken_image_outlined,
+                                    color: Colors.grey,
+                                    size: size.width * 0.24,
                                   ),
                                 ),
                               ),
-                              Text(
-                                widget.documentSnapshot['namaProduk'],
-                                style: const TextStyle(
-                                  fontSize: 14,
-                                  fontFamily: 'FontPoppins',
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text.rich(
-                                TextSpan(
-                                  children: [
-                                    const TextSpan(
-                                      text: "Rp",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xFF262626),
-                                        fontFamily: 'FontPoppins',
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: NumberFormat("#,##0", "en_US")
-                                          .format(
-                                              widget.documentSnapshot['harga'])
-                                          .replaceAll(",", ".")
-                                          .substring(
-                                              0,
-                                              NumberFormat("#,##0", "en_US")
-                                                      .format(widget
-                                                              .documentSnapshot[
-                                                          'harga'])
-                                                      .replaceAll(",", ".")
-                                                      .length -
-                                                  3),
-                                      style: const TextStyle(
-                                        fontSize: 17,
-                                        color: Color(0xFF262626),
-                                        fontFamily: 'FontPoppins',
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                    TextSpan(
-                                      text: NumberFormat("#,##0", "en_US")
-                                          .format(
-                                              widget.documentSnapshot['harga'])
-                                          .replaceAll(",", ".")
-                                          .substring(
-                                              NumberFormat("#,##0", "en_US")
-                                                      .format(widget
-                                                              .documentSnapshot[
-                                                          'harga'])
-                                                      .replaceAll(",", ".")
-                                                      .length -
-                                                  3),
-                                      style: const TextStyle(
-                                        fontSize: 14,
-                                        color: Color(0xFF262626),
-                                        fontFamily: 'FontPoppins',
-                                        fontWeight: FontWeight.w600,
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                textAlign: TextAlign.left,
-                                maxLines: 2,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                              SizedBox(
-                                height: 15,
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: Container(
-                          padding: const EdgeInsets.all(20.0),
-                          width: double.infinity,
-                          height: 200,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(30.0),
-                              topRight: Radius.circular(30.0),
                             ),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text(
-                                'Spesifikasi',
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w600,
-                                  fontFamily: 'FontPoppins',
-                                  fontSize: 15,
-                                ),
+                            Text(
+                              widget.documentSnapshot['namaProduk'],
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontFamily: 'FontPoppins',
+                                fontWeight: FontWeight.w600,
                               ),
-                              SizedBox(
-                                height: 7,
+                            ),
+                            Text.rich(
+                              TextSpan(
+                                children: [
+                                  const TextSpan(
+                                    text: "Rp",
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xFF262626),
+                                      fontFamily: 'FontPoppins',
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: NumberFormat("#,##0", "en_US")
+                                        .format(
+                                            widget.documentSnapshot['harga'])
+                                        .replaceAll(",", ".")
+                                        .substring(
+                                            0,
+                                            NumberFormat("#,##0", "en_US")
+                                                    .format(
+                                                        widget.documentSnapshot[
+                                                            'harga'])
+                                                    .replaceAll(",", ".")
+                                                    .length -
+                                                3),
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      color: Color(0xFF262626),
+                                      fontFamily: 'FontPoppins',
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  TextSpan(
+                                    text: NumberFormat("#,##0", "en_US")
+                                        .format(
+                                            widget.documentSnapshot['harga'])
+                                        .replaceAll(",", ".")
+                                        .substring(NumberFormat(
+                                                    "#,##0", "en_US")
+                                                .format(widget
+                                                    .documentSnapshot['harga'])
+                                                .replaceAll(",", ".")
+                                                .length -
+                                            3),
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                      color: Color(0xFF262626),
+                                      fontFamily: 'FontPoppins',
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                ],
                               ),
-                              Text(
-                                'Resolusi foto maksimal : ${widget.documentSnapshot['resGbr']} px \n'
-                                'Resolusi video maksimal : ${widget.documentSnapshot['resVid']} p \n'
-                                'ISO maksimal : ${widget.documentSnapshot['maxISO']} \n'
-                                'Baterai : ${widget.documentSnapshot['baterai']} mAh \n'
-                                'Berat : ${widget.documentSnapshot['berat']} g \n',
-                                // 'Sensor CMOS APS-C 24,1 megapiksel & DIGIC 4+ AF 9 titik dengan 1 titik AF tipe silang tengah \n'
-                                // 'Mendukung Wi-Fi dan NFC',
-                                style: TextStyle(
-                                    fontFamily: 'FontPoppins',
-                                    fontSize: 13,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          ),
+                              textAlign: TextAlign.left,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                            SizedBox(
+                              height: 15,
+                            )
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.all(20.0),
+                        width: double.infinity,
+                        height: 200,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(30.0),
+                            topRight: Radius.circular(30.0),
+                          ),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              'Spesifikasi',
+                              style: TextStyle(
+                                fontWeight: FontWeight.w600,
+                                fontFamily: 'FontPoppins',
+                                fontSize: 15,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 7,
+                            ),
+                            Text(
+                              'Resolusi foto maksimal : ${widget.documentSnapshot['resGbr']} px \n'
+                              'Resolusi video maksimal : ${widget.documentSnapshot['resVid']} p \n'
+                              'ISO maksimal : ${widget.documentSnapshot['maxISO']} \n'
+                              'Baterai : ${widget.documentSnapshot['baterai']} mAh \n'
+                              'Berat : ${widget.documentSnapshot['berat']} g \n',
+                              // 'Sensor CMOS APS-C 24,1 megapiksel & DIGIC 4+ AF 9 titik dengan 1 titik AF tipe silang tengah \n'
+                              // 'Mendukung Wi-Fi dan NFC',
+                              style: TextStyle(
+                                  fontFamily: 'FontPoppins',
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
       backgroundColor: selectedIndex == 0 ? Colors.white : Colors.white,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

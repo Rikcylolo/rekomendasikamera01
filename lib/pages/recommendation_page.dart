@@ -1666,6 +1666,8 @@ class _RecommendationPageState extends State<RecommendationPage> {
     List<QueryDocumentSnapshot<Map<String, dynamic>>> camera = [];
     List<List<dynamic>> hasilWaspas = [];
 
+    int total = resolusiFoto + resolusiVideo + iso + baterai + berat + harga;
+
     double maxC(List<double> c) {
       double maxNumber = c[0];
       for (int i = 1; i < c.length; i++) {
@@ -1767,19 +1769,19 @@ class _RecommendationPageState extends State<RecommendationPage> {
       //       int harga,
 
       final q = 0.5 *
-              ((normalization[0][i] * resolusiFoto.toDouble()) +
-                  (normalization[1][i] * resolusiVideo.toDouble()) +
-                  (normalization[2][i] * iso.toDouble()) +
-                  (normalization[3][i] * baterai.toDouble()) +
-                  (normalization[4][i] * berat.toDouble()) +
-                  (normalization[5][i] * harga.toDouble())) +
+              ((normalization[0][i] * (resolusiFoto.toDouble() / total)) +
+                  (normalization[1][i] * (resolusiVideo.toDouble() / total)) +
+                  (normalization[2][i] * (iso.toDouble() / total)) +
+                  (normalization[3][i] * (baterai.toDouble() / total)) +
+                  (normalization[4][i] * (berat.toDouble() / total)) +
+                  (normalization[5][i] * (harga.toDouble() / total))) +
           0.5 *
-              (pow(normalization[0][i], resolusiFoto.toDouble()) +
-                  pow(normalization[1][i], resolusiVideo.toDouble()) +
-                  pow(normalization[2][i], iso.toDouble()) +
-                  pow(normalization[3][i], baterai.toDouble()) +
-                  pow(normalization[4][i], berat.toDouble()) +
-                  pow(normalization[5][i], harga.toDouble()));
+              (pow(normalization[0][i], (resolusiFoto.toDouble() / total)) +
+                  pow(normalization[1][i], (resolusiVideo.toDouble() / total)) +
+                  pow(normalization[2][i], (iso.toDouble() / total)) +
+                  pow(normalization[3][i], (baterai.toDouble() / total)) +
+                  pow(normalization[4][i], (berat.toDouble() / total)) +
+                  pow(normalization[5][i], (harga.toDouble() / total)));
 
       hasilWaspas.add(
         [
